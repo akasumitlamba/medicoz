@@ -1,0 +1,633 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AD51A3942997A81D007926BB /* userAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD51A3932997A81C007926BB /* userAuth.swift */; };
+		AD51A3972997FFED007926BB /* userModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD51A3962997FFED007926BB /* userModel.swift */; };
+		AD529071299F3C3800425FD7 /* profileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD529070299F3C3800425FD7 /* profileView.swift */; };
+		AD529073299F410900425FD7 /* testUII.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD529072299F410900425FD7 /* testUII.swift */; };
+		AD529075299F489900425FD7 /* TruenoRound.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD529074299F489800425FD7 /* TruenoRound.otf */; };
+		AD529078299FD70500425FD7 /* editProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD529077299FD70500425FD7 /* editProfile.swift */; };
+		AD529087299FFD1800425FD7 /* catogeryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD529086299FFD1800425FD7 /* catogeryDetails.swift */; };
+		AD90B895299B6523005F932F /* redirectAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90B894299B6523005F932F /* redirectAuth.swift */; };
+		AD9E5CF129A1F74F00778157 /* PatientProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E5CF029A1F74F00778157 /* PatientProfileView.swift */; };
+		AD9E5CF329A1FE7B00778157 /* test3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E5CF229A1FE7B00778157 /* test3.swift */; };
+		AD9E5CF529A23DC500778157 /* catagoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E5CF429A23DC500778157 /* catagoryModel.swift */; };
+		ADAB92F42990314400F8D1FA /* medicozApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB92F32990314400F8D1FA /* medicozApp.swift */; };
+		ADAB92F62990314400F8D1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB92F52990314400F8D1FA /* ContentView.swift */; };
+		ADAB92F82990314500F8D1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADAB92F72990314500F8D1FA /* Assets.xcassets */; };
+		ADAB92FB2990314500F8D1FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADAB92FA2990314500F8D1FA /* Preview Assets.xcassets */; };
+		ADAB9303299031C500F8D1FA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ADAB9302299031C500F8D1FA /* FirebaseAuth */; };
+		ADAB9305299031C500F8D1FA /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = ADAB9304299031C500F8D1FA /* FirebaseDatabase */; };
+		ADAB9307299031C500F8D1FA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = ADAB9306299031C500F8D1FA /* FirebaseFirestore */; };
+		ADAB9309299031C500F8D1FA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = ADAB9308299031C500F8D1FA /* FirebaseStorage */; };
+		ADAB93162990321700F8D1FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADAB93112990321500F8D1FA /* GoogleService-Info.plist */; };
+		ADAB93182990321700F8D1FA /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93132990321500F8D1FA /* SplashScreenView.swift */; };
+		ADAB93712990326200F8D1FA /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADAB93322990326200F8D1FA /* PTMono-Regular.ttf */; };
+		ADAB93762990326200F8D1FA /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADAB93382990326200F8D1FA /* SpaceMono-Regular.ttf */; };
+		ADAB93772990326200F8D1FA /* SourceCodePro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADAB93392990326200F8D1FA /* SourceCodePro-Regular.ttf */; };
+		ADAB938A2990326200F8D1FA /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADAB934D2990326200F8D1FA /* Poppins-Regular.ttf */; };
+		ADAB938B2990326200F8D1FA /* MontserratAlternates-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADAB934E2990326200F8D1FA /* MontserratAlternates-Regular.ttf */; };
+		ADAB93972990326200F8D1FA /* Catamaran-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADAB935C2990326200F8D1FA /* Catamaran-Regular.ttf */; };
+		ADAB939D299032BD00F8D1FA /* forgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB9399299032BD00F8D1FA /* forgotPassword.swift */; };
+		ADAB939F299032BD00F8D1FA /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB939B299032BD00F8D1FA /* UserSession.swift */; };
+		ADAB93A5299032D100F8D1FA /* DrHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93A3299032D000F8D1FA /* DrHomeView.swift */; };
+		ADAB93B0299032E100F8D1FA /* patientHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93A7299032E100F8D1FA /* patientHome.swift */; };
+		ADAB93B1299032E100F8D1FA /* PatientHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93A8299032E100F8D1FA /* PatientHomeView.swift */; };
+		ADAB93B3299032E100F8D1FA /* imagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93AA299032E100F8D1FA /* imagePicker.swift */; };
+		ADAB93B4299032E100F8D1FA /* medicalHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93AB299032E100F8D1FA /* medicalHistory.swift */; };
+		ADAB93B7299032E100F8D1FA /* appointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93AE299032E100F8D1FA /* appointmentView.swift */; };
+		ADAB93C22990333400F8D1FA /* appointmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93BD2990333300F8D1FA /* appointmentCard.swift */; };
+		ADAB93CA2990334000F8D1FA /* dataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C52990334000F8D1FA /* dataManager.swift */; };
+		ADAB93CB2990334000F8D1FA /* appointmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C62990334000F8D1FA /* appointmentModel.swift */; };
+		ADAB93CD2990334000F8D1FA /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C82990334000F8D1FA /* Patient.swift */; };
+		ADAB93CE2990334000F8D1FA /* patientFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C92990334000F8D1FA /* patientFormModel.swift */; };
+		ADCA14F8299BD06D00E47041 /* accountSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA14F7299BD06D00E47041 /* accountSetup.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AD51A3932997A81C007926BB /* userAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userAuth.swift; sourceTree = "<group>"; };
+		AD51A3962997FFED007926BB /* userModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userModel.swift; sourceTree = "<group>"; };
+		AD529070299F3C3800425FD7 /* profileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileView.swift; sourceTree = "<group>"; };
+		AD529072299F410900425FD7 /* testUII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testUII.swift; sourceTree = "<group>"; };
+		AD529074299F489800425FD7 /* TruenoRound.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TruenoRound.otf; sourceTree = "<group>"; };
+		AD529076299F48D300425FD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AD529077299FD70500425FD7 /* editProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editProfile.swift; sourceTree = "<group>"; };
+		AD529086299FFD1800425FD7 /* catogeryDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catogeryDetails.swift; sourceTree = "<group>"; };
+		AD90B894299B6523005F932F /* redirectAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = redirectAuth.swift; sourceTree = "<group>"; };
+		AD9E5CF029A1F74F00778157 /* PatientProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientProfileView.swift; sourceTree = "<group>"; };
+		AD9E5CF229A1FE7B00778157 /* test3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test3.swift; sourceTree = "<group>"; };
+		AD9E5CF429A23DC500778157 /* catagoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catagoryModel.swift; sourceTree = "<group>"; };
+		ADAB92F02990314400F8D1FA /* medicoz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = medicoz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADAB92F32990314400F8D1FA /* medicozApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = medicozApp.swift; sourceTree = "<group>"; };
+		ADAB92F52990314400F8D1FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ADAB92F72990314500F8D1FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ADAB92FA2990314500F8D1FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ADAB93112990321500F8D1FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ADAB93132990321500F8D1FA /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		ADAB93322990326200F8D1FA /* PTMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTMono-Regular.ttf"; sourceTree = "<group>"; };
+		ADAB93382990326200F8D1FA /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
+		ADAB93392990326200F8D1FA /* SourceCodePro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Regular.ttf"; sourceTree = "<group>"; };
+		ADAB934D2990326200F8D1FA /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		ADAB934E2990326200F8D1FA /* MontserratAlternates-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Regular.ttf"; sourceTree = "<group>"; };
+		ADAB935C2990326200F8D1FA /* Catamaran-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Catamaran-Regular.ttf"; sourceTree = "<group>"; };
+		ADAB9399299032BD00F8D1FA /* forgotPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = forgotPassword.swift; sourceTree = "<group>"; };
+		ADAB939B299032BD00F8D1FA /* UserSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		ADAB93A3299032D000F8D1FA /* DrHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrHomeView.swift; sourceTree = "<group>"; };
+		ADAB93A7299032E100F8D1FA /* patientHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = patientHome.swift; sourceTree = "<group>"; };
+		ADAB93A8299032E100F8D1FA /* PatientHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientHomeView.swift; sourceTree = "<group>"; };
+		ADAB93AA299032E100F8D1FA /* imagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imagePicker.swift; sourceTree = "<group>"; };
+		ADAB93AB299032E100F8D1FA /* medicalHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = medicalHistory.swift; sourceTree = "<group>"; };
+		ADAB93AE299032E100F8D1FA /* appointmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appointmentView.swift; sourceTree = "<group>"; };
+		ADAB93BD2990333300F8D1FA /* appointmentCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appointmentCard.swift; sourceTree = "<group>"; };
+		ADAB93C52990334000F8D1FA /* dataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataManager.swift; sourceTree = "<group>"; };
+		ADAB93C62990334000F8D1FA /* appointmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appointmentModel.swift; sourceTree = "<group>"; };
+		ADAB93C82990334000F8D1FA /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
+		ADAB93C92990334000F8D1FA /* patientFormModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = patientFormModel.swift; sourceTree = "<group>"; };
+		ADCA14F7299BD06D00E47041 /* accountSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountSetup.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADAB92ED2990314400F8D1FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADAB9305299031C500F8D1FA /* FirebaseDatabase in Frameworks */,
+				ADAB9309299031C500F8D1FA /* FirebaseStorage in Frameworks */,
+				ADAB9303299031C500F8D1FA /* FirebaseAuth in Frameworks */,
+				ADAB9307299031C500F8D1FA /* FirebaseFirestore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AD51A3952997AE89007926BB /* setup */ = {
+			isa = PBXGroup;
+			children = (
+				ADCA14F7299BD06D00E47041 /* accountSetup.swift */,
+				ADAB93AA299032E100F8D1FA /* imagePicker.swift */,
+			);
+			path = setup;
+			sourceTree = "<group>";
+		};
+		AD52906F299EA3C700425FD7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AD529077299FD70500425FD7 /* editProfile.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AD52907A299FF22600425FD7 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AD52907E299FF3CA00425FD7 /* Models */,
+				ADAB93A8299032E100F8D1FA /* PatientHomeView.swift */,
+				AD529086299FFD1800425FD7 /* catogeryDetails.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AD52907B299FF23000425FD7 /* Appointment */ = {
+			isa = PBXGroup;
+			children = (
+				ADAB93BD2990333300F8D1FA /* appointmentCard.swift */,
+				ADAB93AE299032E100F8D1FA /* appointmentView.swift */,
+			);
+			path = Appointment;
+			sourceTree = "<group>";
+		};
+		AD52907C299FF23D00425FD7 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				ADAB93AB299032E100F8D1FA /* medicalHistory.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		AD52907D299FF24700425FD7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AD52906F299EA3C700425FD7 /* Components */,
+				AD529070299F3C3800425FD7 /* profileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		AD52907E299FF3CA00425FD7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AD9E5CF429A23DC500778157 /* catagoryModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AD9E5CEF29A1F73500778157 /* TestGroup */ = {
+			isa = PBXGroup;
+			children = (
+				AD529072299F410900425FD7 /* testUII.swift */,
+				AD9E5CF029A1F74F00778157 /* PatientProfileView.swift */,
+				AD9E5CF229A1FE7B00778157 /* test3.swift */,
+			);
+			path = TestGroup;
+			sourceTree = "<group>";
+		};
+		ADAB92E72990314400F8D1FA = {
+			isa = PBXGroup;
+			children = (
+				ADAB92F22990314400F8D1FA /* medicoz */,
+				ADAB92F12990314400F8D1FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ADAB92F12990314400F8D1FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADAB92F02990314400F8D1FA /* medicoz.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADAB92F22990314400F8D1FA /* medicoz */ = {
+			isa = PBXGroup;
+			children = (
+				AD9E5CEF29A1F73500778157 /* TestGroup */,
+				AD529076299F48D300425FD7 /* Info.plist */,
+				ADAB92F32990314400F8D1FA /* medicozApp.swift */,
+				ADAB92F52990314400F8D1FA /* ContentView.swift */,
+				ADAB93132990321500F8D1FA /* SplashScreenView.swift */,
+				ADAB93112990321500F8D1FA /* GoogleService-Info.plist */,
+				ADAB9398299032BD00F8D1FA /* Auth */,
+				AD51A3952997AE89007926BB /* setup */,
+				ADAB93C42990334000F8D1FA /* Models */,
+				ADAB93A6299032E100F8D1FA /* PatientViews */,
+				ADAB93A1299032D000F8D1FA /* DrViews */,
+				ADAB931A2990326100F8D1FA /* fonts */,
+				ADAB92F92990314500F8D1FA /* Preview Content */,
+				ADAB92F72990314500F8D1FA /* Assets.xcassets */,
+			);
+			path = medicoz;
+			sourceTree = "<group>";
+		};
+		ADAB92F92990314500F8D1FA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				ADAB92FA2990314500F8D1FA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ADAB931A2990326100F8D1FA /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				ADAB935C2990326200F8D1FA /* Catamaran-Regular.ttf */,
+				ADAB934E2990326200F8D1FA /* MontserratAlternates-Regular.ttf */,
+				ADAB93322990326200F8D1FA /* PTMono-Regular.ttf */,
+				ADAB93392990326200F8D1FA /* SourceCodePro-Regular.ttf */,
+				AD529074299F489800425FD7 /* TruenoRound.otf */,
+				ADAB93382990326200F8D1FA /* SpaceMono-Regular.ttf */,
+				ADAB934D2990326200F8D1FA /* Poppins-Regular.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		ADAB9398299032BD00F8D1FA /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				ADAB9399299032BD00F8D1FA /* forgotPassword.swift */,
+				ADAB939B299032BD00F8D1FA /* UserSession.swift */,
+				AD51A3932997A81C007926BB /* userAuth.swift */,
+				AD90B894299B6523005F932F /* redirectAuth.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		ADAB93A1299032D000F8D1FA /* DrViews */ = {
+			isa = PBXGroup;
+			children = (
+				ADAB93A3299032D000F8D1FA /* DrHomeView.swift */,
+			);
+			path = DrViews;
+			sourceTree = "<group>";
+		};
+		ADAB93A6299032E100F8D1FA /* PatientViews */ = {
+			isa = PBXGroup;
+			children = (
+				ADAB93A7299032E100F8D1FA /* patientHome.swift */,
+				AD52907A299FF22600425FD7 /* Home */,
+				AD52907B299FF23000425FD7 /* Appointment */,
+				AD52907C299FF23D00425FD7 /* History */,
+				AD52907D299FF24700425FD7 /* Profile */,
+			);
+			path = PatientViews;
+			sourceTree = "<group>";
+		};
+		ADAB93C42990334000F8D1FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ADAB93C52990334000F8D1FA /* dataManager.swift */,
+				ADAB93C62990334000F8D1FA /* appointmentModel.swift */,
+				ADAB93C82990334000F8D1FA /* Patient.swift */,
+				ADAB93C92990334000F8D1FA /* patientFormModel.swift */,
+				AD51A3962997FFED007926BB /* userModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ADAB92EF2990314400F8D1FA /* medicoz */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADAB92FE2990314500F8D1FA /* Build configuration list for PBXNativeTarget "medicoz" */;
+			buildPhases = (
+				ADAB92EC2990314400F8D1FA /* Sources */,
+				ADAB92ED2990314400F8D1FA /* Frameworks */,
+				ADAB92EE2990314400F8D1FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = medicoz;
+			packageProductDependencies = (
+				ADAB9302299031C500F8D1FA /* FirebaseAuth */,
+				ADAB9304299031C500F8D1FA /* FirebaseDatabase */,
+				ADAB9306299031C500F8D1FA /* FirebaseFirestore */,
+				ADAB9308299031C500F8D1FA /* FirebaseStorage */,
+			);
+			productName = medicoz;
+			productReference = ADAB92F02990314400F8D1FA /* medicoz.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADAB92E82990314400F8D1FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					ADAB92EF2990314400F8D1FA = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = ADAB92EB2990314400F8D1FA /* Build configuration list for PBXProject "medicoz" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ADAB92E72990314400F8D1FA;
+			packageReferences = (
+				ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = ADAB92F12990314400F8D1FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADAB92EF2990314400F8D1FA /* medicoz */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADAB92EE2990314400F8D1FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADAB938A2990326200F8D1FA /* Poppins-Regular.ttf in Resources */,
+				ADAB92FB2990314500F8D1FA /* Preview Assets.xcassets in Resources */,
+				ADAB93972990326200F8D1FA /* Catamaran-Regular.ttf in Resources */,
+				ADAB93712990326200F8D1FA /* PTMono-Regular.ttf in Resources */,
+				ADAB93772990326200F8D1FA /* SourceCodePro-Regular.ttf in Resources */,
+				AD529075299F489900425FD7 /* TruenoRound.otf in Resources */,
+				ADAB938B2990326200F8D1FA /* MontserratAlternates-Regular.ttf in Resources */,
+				ADAB92F82990314500F8D1FA /* Assets.xcassets in Resources */,
+				ADAB93762990326200F8D1FA /* SpaceMono-Regular.ttf in Resources */,
+				ADAB93162990321700F8D1FA /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADAB92EC2990314400F8D1FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADAB93B4299032E100F8D1FA /* medicalHistory.swift in Sources */,
+				AD51A3972997FFED007926BB /* userModel.swift in Sources */,
+				AD529078299FD70500425FD7 /* editProfile.swift in Sources */,
+				ADAB93B7299032E100F8D1FA /* appointmentView.swift in Sources */,
+				ADAB92F62990314400F8D1FA /* ContentView.swift in Sources */,
+				ADAB939F299032BD00F8D1FA /* UserSession.swift in Sources */,
+				ADAB93CB2990334000F8D1FA /* appointmentModel.swift in Sources */,
+				ADAB93B1299032E100F8D1FA /* PatientHomeView.swift in Sources */,
+				ADAB93CE2990334000F8D1FA /* patientFormModel.swift in Sources */,
+				AD529071299F3C3800425FD7 /* profileView.swift in Sources */,
+				ADAB93B0299032E100F8D1FA /* patientHome.swift in Sources */,
+				AD90B895299B6523005F932F /* redirectAuth.swift in Sources */,
+				ADAB93A5299032D100F8D1FA /* DrHomeView.swift in Sources */,
+				AD529073299F410900425FD7 /* testUII.swift in Sources */,
+				ADAB92F42990314400F8D1FA /* medicozApp.swift in Sources */,
+				AD529087299FFD1800425FD7 /* catogeryDetails.swift in Sources */,
+				ADAB93B3299032E100F8D1FA /* imagePicker.swift in Sources */,
+				AD9E5CF129A1F74F00778157 /* PatientProfileView.swift in Sources */,
+				ADAB93C22990333400F8D1FA /* appointmentCard.swift in Sources */,
+				AD9E5CF529A23DC500778157 /* catagoryModel.swift in Sources */,
+				ADAB93CA2990334000F8D1FA /* dataManager.swift in Sources */,
+				ADCA14F8299BD06D00E47041 /* accountSetup.swift in Sources */,
+				ADAB93182990321700F8D1FA /* SplashScreenView.swift in Sources */,
+				AD51A3942997A81D007926BB /* userAuth.swift in Sources */,
+				ADAB939D299032BD00F8D1FA /* forgotPassword.swift in Sources */,
+				AD9E5CF329A1FE7B00778157 /* test3.swift in Sources */,
+				ADAB93CD2990334000F8D1FA /* Patient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ADAB92FC2990314500F8D1FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ADAB92FD2990314500F8D1FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ADAB92FF2990314500F8D1FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"medicoz/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = medicoz/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sachin.medicoz;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ADAB93002990314500F8D1FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"medicoz/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = medicoz/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sachin.medicoz;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADAB92EB2990314400F8D1FA /* Build configuration list for PBXProject "medicoz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADAB92FC2990314500F8D1FA /* Debug */,
+				ADAB92FD2990314500F8D1FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADAB92FE2990314500F8D1FA /* Build configuration list for PBXNativeTarget "medicoz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADAB92FF2990314500F8D1FA /* Debug */,
+				ADAB93002990314500F8D1FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ADAB9302299031C500F8D1FA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		ADAB9304299031C500F8D1FA /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		ADAB9306299031C500F8D1FA /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		ADAB9308299031C500F8D1FA /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = ADAB92E82990314400F8D1FA /* Project object */;
+}
