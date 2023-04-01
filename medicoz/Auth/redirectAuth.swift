@@ -10,14 +10,13 @@ import Firebase
 
 struct redirectAuth: View {
     
-    @State var patientDocumentFound = false
-    @State var doctorDocumentFound = false
-    @State var isLoading = false
+    @StateObject var sessionManager = SessionManager()
+    @Environment (\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {
             
-            if isLoading {
+            if sessionManager.isLoading {
                 // Full screen loader here
                 ZStack {
                     LinearGradient(gradient: Gradient(colors: [Color.green.opacity(0.2), Color.pink.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -29,58 +28,38 @@ struct redirectAuth: View {
             }
             else {
                 VStack{
-                    if patientDocumentFound {
-                        patientHome()
-                    } else if doctorDocumentFound {
-                        DrHomeView()
-                    } else {
-                        accountSetup()
+                    
+                    if sessionManager.userRole == .role1 {
+                        if sessionManager.patientDocumentFound {
+                            patientHome()
+                        } else {
+                            patientAccountSetup()
+                        }
+                    } else if sessionManager.userRole == .role2 {
+                        if sessionManager.doctorDocumentFound {
+                            doctorHome()
+                        } else {
+                            doctorAccountSetup()
+                        }
                     }
                 }
             }
                 
         }.onAppear {
             // Show loader when view appears
-            isLoading = true
+            sessionManager.isLoading = true
             
-            patientApiCall()
-            doctorApiCall()
-                        
+            if sessionManager.userRole == .role1 {
+                sessionManager.patientApiCall()
+            } else if sessionManager.userRole == .role2 {
+                sessionManager.doctorApiCall()
+            }
             // Simulate loading time
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                isLoading = false
+                sessionManager.isLoading = false
             }
         }.edgesIgnoringSafeArea(.all).navigationBarBackButtonHidden(true).navigationBarHidden(true)
     }
-    
-    func patientApiCall() {
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("patients").document(userID).getDocument { (document, error) in
-            if let document = document, document.exists {
-                //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                patientDocumentFound = true
-                //self.dataToDisplay = dataDescription
-            } else {
-                print("Document does not exist")
-                patientDocumentFound = false
-            }
-       }
-    }
-    
-    func doctorApiCall() {
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("doctors").document(userID).getDocument { (document, error) in
-            if let document = document, document.exists {
-                //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                doctorDocumentFound = true
-                //self.dataToDisplay = dataDescription
-            } else {
-                print("Document does not exist")
-                doctorDocumentFound = false
-            }
-       }
-    }
-    
 }
 
 

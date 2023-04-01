@@ -6,20 +6,26 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
 
 struct profileView: View {
     
+    @Environment (\.dismiss) private var dismiss
     @State var editMode: Bool = false
     
     var body: some View {
         NavigationView {
             ZStack{
                 VStack {
+                    
                     VStack {
                         Text("Profile Details")
-                            .padding()
-                            .font(.title2)
-                    }
+                            .font(.title)
+                        
+                        
+                    }.padding(.horizontal).padding(.top, 10)
+                    
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
@@ -169,6 +175,30 @@ struct profileView: View {
                                 }
                                 
                             }
+                            
+                            //Sign Out:
+                            VStack{
+                                
+                                Button {
+                                    //TODO: Signout here
+                                    do {
+                                        try Auth.auth().signOut()
+                                        print("Signed Out Successfully!")
+                                        dismiss()
+                                    } catch {
+                                            print("ERROR: Could not sign out!")
+                                    }
+                                } label: {
+                                    Text("Sign Out")
+                                        .foregroundColor(.red)
+                                        .frame(height: 35)
+                                        .frame(maxWidth: .infinity)
+                                }.buttonStyle(.bordered)
+
+                                    
+                                
+                            }.padding(.top, 30)
+                            
                         }.padding().frame(width: 360)
                     }.sheet(isPresented: $editMode, content: {
                         editProfile()

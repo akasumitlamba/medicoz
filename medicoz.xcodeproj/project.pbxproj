@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD11452E29D84E5E00627FCE /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11452D29D84E5E00627FCE /* Main.swift */; };
+		AD11453029D84ED200627FCE /* doctorAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11452F29D84ED200627FCE /* doctorAuth.swift */; };
+		AD11453229D84EDD00627FCE /* patientAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453129D84EDD00627FCE /* patientAuth.swift */; };
+		AD11453429D863AA00627FCE /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453329D863AA00627FCE /* SessionManager.swift */; };
+		AD11453729D8662800627FCE /* doctorHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453629D8662800627FCE /* doctorHome.swift */; };
+		AD11453929D8926200627FCE /* doctorAccountSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453829D8926200627FCE /* doctorAccountSetup.swift */; };
+		AD11453B29D8930E00627FCE /* patientAccountSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453A29D8930E00627FCE /* patientAccountSetup.swift */; };
+		AD17CEE429D56CD700A9B256 /* screen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD17CEE329D56CD700A9B256 /* screen1.swift */; };
+		AD17CEE629D56CDF00A9B256 /* screen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD17CEE529D56CDF00A9B256 /* screen2.swift */; };
 		AD51A3942997A81D007926BB /* userAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD51A3932997A81C007926BB /* userAuth.swift */; };
 		AD51A3972997FFED007926BB /* userModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD51A3962997FFED007926BB /* userModel.swift */; };
 		AD529071299F3C3800425FD7 /* profileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD529070299F3C3800425FD7 /* profileView.swift */; };
@@ -35,8 +44,6 @@
 		ADAB938B2990326200F8D1FA /* MontserratAlternates-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADAB934E2990326200F8D1FA /* MontserratAlternates-Regular.ttf */; };
 		ADAB93972990326200F8D1FA /* Catamaran-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADAB935C2990326200F8D1FA /* Catamaran-Regular.ttf */; };
 		ADAB939D299032BD00F8D1FA /* forgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB9399299032BD00F8D1FA /* forgotPassword.swift */; };
-		ADAB939F299032BD00F8D1FA /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB939B299032BD00F8D1FA /* UserSession.swift */; };
-		ADAB93A5299032D100F8D1FA /* DrHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93A3299032D000F8D1FA /* DrHomeView.swift */; };
 		ADAB93B0299032E100F8D1FA /* patientHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93A7299032E100F8D1FA /* patientHome.swift */; };
 		ADAB93B1299032E100F8D1FA /* PatientHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93A8299032E100F8D1FA /* PatientHomeView.swift */; };
 		ADAB93B3299032E100F8D1FA /* imagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93AA299032E100F8D1FA /* imagePicker.swift */; };
@@ -47,10 +54,20 @@
 		ADAB93CB2990334000F8D1FA /* appointmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C62990334000F8D1FA /* appointmentModel.swift */; };
 		ADAB93CD2990334000F8D1FA /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C82990334000F8D1FA /* Patient.swift */; };
 		ADAB93CE2990334000F8D1FA /* patientFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C92990334000F8D1FA /* patientFormModel.swift */; };
+		ADC0274D29AB9C300092A967 /* documentLocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC0274C29AB9C300092A967 /* documentLocker.swift */; };
 		ADCA14F8299BD06D00E47041 /* accountSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA14F7299BD06D00E47041 /* accountSetup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD11452D29D84E5E00627FCE /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		AD11452F29D84ED200627FCE /* doctorAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorAuth.swift; sourceTree = "<group>"; };
+		AD11453129D84EDD00627FCE /* patientAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientAuth.swift; sourceTree = "<group>"; };
+		AD11453329D863AA00627FCE /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		AD11453629D8662800627FCE /* doctorHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorHome.swift; sourceTree = "<group>"; };
+		AD11453829D8926200627FCE /* doctorAccountSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorAccountSetup.swift; sourceTree = "<group>"; };
+		AD11453A29D8930E00627FCE /* patientAccountSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientAccountSetup.swift; sourceTree = "<group>"; };
+		AD17CEE329D56CD700A9B256 /* screen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screen1.swift; sourceTree = "<group>"; };
+		AD17CEE529D56CDF00A9B256 /* screen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screen2.swift; sourceTree = "<group>"; };
 		AD51A3932997A81C007926BB /* userAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userAuth.swift; sourceTree = "<group>"; };
 		AD51A3962997FFED007926BB /* userModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userModel.swift; sourceTree = "<group>"; };
 		AD529070299F3C3800425FD7 /* profileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileView.swift; sourceTree = "<group>"; };
@@ -77,8 +94,6 @@
 		ADAB934E2990326200F8D1FA /* MontserratAlternates-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Regular.ttf"; sourceTree = "<group>"; };
 		ADAB935C2990326200F8D1FA /* Catamaran-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Catamaran-Regular.ttf"; sourceTree = "<group>"; };
 		ADAB9399299032BD00F8D1FA /* forgotPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = forgotPassword.swift; sourceTree = "<group>"; };
-		ADAB939B299032BD00F8D1FA /* UserSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
-		ADAB93A3299032D000F8D1FA /* DrHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrHomeView.swift; sourceTree = "<group>"; };
 		ADAB93A7299032E100F8D1FA /* patientHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = patientHome.swift; sourceTree = "<group>"; };
 		ADAB93A8299032E100F8D1FA /* PatientHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientHomeView.swift; sourceTree = "<group>"; };
 		ADAB93AA299032E100F8D1FA /* imagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imagePicker.swift; sourceTree = "<group>"; };
@@ -89,6 +104,7 @@
 		ADAB93C62990334000F8D1FA /* appointmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appointmentModel.swift; sourceTree = "<group>"; };
 		ADAB93C82990334000F8D1FA /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		ADAB93C92990334000F8D1FA /* patientFormModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = patientFormModel.swift; sourceTree = "<group>"; };
+		ADC0274C29AB9C300092A967 /* documentLocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentLocker.swift; sourceTree = "<group>"; };
 		ADCA14F7299BD06D00E47041 /* accountSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountSetup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,9 +123,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD11453529D8660400627FCE /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		AD51A3952997AE89007926BB /* setup */ = {
 			isa = PBXGroup;
 			children = (
+				AD11453829D8926200627FCE /* doctorAccountSetup.swift */,
+				AD11453A29D8930E00627FCE /* patientAccountSetup.swift */,
 				ADCA14F7299BD06D00E47041 /* accountSetup.swift */,
 				ADAB93AA299032E100F8D1FA /* imagePicker.swift */,
 			);
@@ -130,6 +155,7 @@
 				AD52907E299FF3CA00425FD7 /* Models */,
 				ADAB93A8299032E100F8D1FA /* PatientHomeView.swift */,
 				AD529086299FFD1800425FD7 /* catogeryDetails.swift */,
+				ADC0274C29AB9C300092A967 /* documentLocker.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -197,20 +223,24 @@
 		ADAB92F22990314400F8D1FA /* medicoz */ = {
 			isa = PBXGroup;
 			children = (
+				AD11453529D8660400627FCE /* New Group */,
 				AD9E5CEF29A1F73500778157 /* TestGroup */,
 				AD529076299F48D300425FD7 /* Info.plist */,
 				ADAB92F32990314400F8D1FA /* medicozApp.swift */,
 				ADAB92F52990314400F8D1FA /* ContentView.swift */,
 				ADAB93132990321500F8D1FA /* SplashScreenView.swift */,
+				AD11452D29D84E5E00627FCE /* Main.swift */,
 				ADAB93112990321500F8D1FA /* GoogleService-Info.plist */,
 				ADAB9398299032BD00F8D1FA /* Auth */,
 				AD51A3952997AE89007926BB /* setup */,
 				ADAB93C42990334000F8D1FA /* Models */,
 				ADAB93A6299032E100F8D1FA /* PatientViews */,
-				ADAB93A1299032D000F8D1FA /* DrViews */,
+				ADAB93A1299032D000F8D1FA /* DoctorViews */,
 				ADAB931A2990326100F8D1FA /* fonts */,
 				ADAB92F92990314500F8D1FA /* Preview Content */,
 				ADAB92F72990314500F8D1FA /* Assets.xcassets */,
+				AD17CEE329D56CD700A9B256 /* screen1.swift */,
+				AD17CEE529D56CDF00A9B256 /* screen2.swift */,
 			);
 			path = medicoz;
 			sourceTree = "<group>";
@@ -240,20 +270,22 @@
 		ADAB9398299032BD00F8D1FA /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				AD11453329D863AA00627FCE /* SessionManager.swift */,
+				AD11453129D84EDD00627FCE /* patientAuth.swift */,
+				AD11452F29D84ED200627FCE /* doctorAuth.swift */,
 				ADAB9399299032BD00F8D1FA /* forgotPassword.swift */,
-				ADAB939B299032BD00F8D1FA /* UserSession.swift */,
 				AD51A3932997A81C007926BB /* userAuth.swift */,
 				AD90B894299B6523005F932F /* redirectAuth.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		ADAB93A1299032D000F8D1FA /* DrViews */ = {
+		ADAB93A1299032D000F8D1FA /* DoctorViews */ = {
 			isa = PBXGroup;
 			children = (
-				ADAB93A3299032D000F8D1FA /* DrHomeView.swift */,
+				AD11453629D8662800627FCE /* doctorHome.swift */,
 			);
-			path = DrViews;
+			path = DoctorViews;
 			sourceTree = "<group>";
 		};
 		ADAB93A6299032E100F8D1FA /* PatientViews */ = {
@@ -370,26 +402,34 @@
 				ADAB93B4299032E100F8D1FA /* medicalHistory.swift in Sources */,
 				AD51A3972997FFED007926BB /* userModel.swift in Sources */,
 				AD529078299FD70500425FD7 /* editProfile.swift in Sources */,
+				AD11453929D8926200627FCE /* doctorAccountSetup.swift in Sources */,
 				ADAB93B7299032E100F8D1FA /* appointmentView.swift in Sources */,
 				ADAB92F62990314400F8D1FA /* ContentView.swift in Sources */,
-				ADAB939F299032BD00F8D1FA /* UserSession.swift in Sources */,
+				AD17CEE629D56CDF00A9B256 /* screen2.swift in Sources */,
 				ADAB93CB2990334000F8D1FA /* appointmentModel.swift in Sources */,
+				AD11453029D84ED200627FCE /* doctorAuth.swift in Sources */,
 				ADAB93B1299032E100F8D1FA /* PatientHomeView.swift in Sources */,
 				ADAB93CE2990334000F8D1FA /* patientFormModel.swift in Sources */,
 				AD529071299F3C3800425FD7 /* profileView.swift in Sources */,
 				ADAB93B0299032E100F8D1FA /* patientHome.swift in Sources */,
 				AD90B895299B6523005F932F /* redirectAuth.swift in Sources */,
-				ADAB93A5299032D100F8D1FA /* DrHomeView.swift in Sources */,
+				AD11453229D84EDD00627FCE /* patientAuth.swift in Sources */,
+				AD11453429D863AA00627FCE /* SessionManager.swift in Sources */,
 				AD529073299F410900425FD7 /* testUII.swift in Sources */,
+				ADC0274D29AB9C300092A967 /* documentLocker.swift in Sources */,
 				ADAB92F42990314400F8D1FA /* medicozApp.swift in Sources */,
+				AD11453729D8662800627FCE /* doctorHome.swift in Sources */,
+				AD11452E29D84E5E00627FCE /* Main.swift in Sources */,
 				AD529087299FFD1800425FD7 /* catogeryDetails.swift in Sources */,
 				ADAB93B3299032E100F8D1FA /* imagePicker.swift in Sources */,
 				AD9E5CF129A1F74F00778157 /* PatientProfileView.swift in Sources */,
 				ADAB93C22990333400F8D1FA /* appointmentCard.swift in Sources */,
 				AD9E5CF529A23DC500778157 /* catagoryModel.swift in Sources */,
 				ADAB93CA2990334000F8D1FA /* dataManager.swift in Sources */,
+				AD17CEE429D56CD700A9B256 /* screen1.swift in Sources */,
 				ADCA14F8299BD06D00E47041 /* accountSetup.swift in Sources */,
 				ADAB93182990321700F8D1FA /* SplashScreenView.swift in Sources */,
+				AD11453B29D8930E00627FCE /* patientAccountSetup.swift in Sources */,
 				AD51A3942997A81D007926BB /* userAuth.swift in Sources */,
 				ADAB939D299032BD00F8D1FA /* forgotPassword.swift in Sources */,
 				AD9E5CF329A1FE7B00778157 /* test3.swift in Sources */,

@@ -13,13 +13,14 @@ struct SplashScreenView: View {
     @State private var size = 0.7
     @State private var opacity = 0.4
     
-    @EnvironmentObject var settings: UserSession
-    
+    @StateObject var sessionManager = SessionManager()
     
     var body: some View {
         ZStack{
             if isActive {
-                userAuth()
+                ZStack {
+                    Main()
+                }
             }
             else {
                 ZStack {

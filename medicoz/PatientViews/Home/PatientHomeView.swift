@@ -9,7 +9,10 @@ import SwiftUI
 import Firebase
 
 struct PatientHomeView: View {
+    @Binding var selectedTab: Int
+    @State var showDocuments = false
     @Environment (\.dismiss) private var dismiss
+    
     var body: some View {
         NavigationView {
             ZStack{
@@ -21,10 +24,78 @@ struct PatientHomeView: View {
                         .frame(height: 1)
 
                     // Divider()
-                    Scroller()
+                    
+                    //Scroller Start
+                    ScrollView(showsIndicators: false) {
+                        ZStack {
+                            VStack {
+                                //Locker Banner Start
+                                ZStack {
+                                    VStack {
+                                        HStack(alignment: .center, spacing: 20) {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(Color("darkAcc"))
+                                                .frame(height: 170)
+                                                .overlay(
+                                                    HStack {
+                                                        VStack(alignment: .leading){
+                                                            Text("Your Digital Health Locker")
+                                                                .multilineTextAlignment(.leading)
+                                                                .foregroundColor(.white)
+                                                                .font(.title2)
+                                                            Spacer()
+                                                            Text("Quickle view your health records")
+                                                                .foregroundColor(.white)
+                                                                .font(.subheadline)
+                                                            Spacer()
+                                                            
+                                                            NavigationLink(destination: documentLocker()){
+                                                                Text("Click Here")
+                                                                    .padding(.horizontal)
+                                                                    .padding(.vertical, 10)
+                                                                    .background(.white)
+                                                                    .cornerRadius(10)
+                                                            }
+                                                            
+
+                                                        }.padding(.leading).padding(.vertical)
+                                                        Spacer()
+                                                        Image("pp")
+                                                            .resizable()
+                                                            //.frame(width: 150, height: 140)
+                                                            .scaledToFit()
+                                                            .padding(.vertical)
+                                                            .padding(.trailing)
+                                                    }
+                                                )
+                                        }.padding()
+                                    }
+                                    .navigationBarBackButtonHidden(true)
+                                    .navigationBarHidden(true)
+                                }
+                                //Locker banner End
+                                
+                                //Catagory Start
+                                //catagory()
+                                //Catagory End
+                                
+                                //Upcoming Appointments Start
+                                upcomingAppointments()
+                                //Upcoming Appointments End
+                                
+                                //Nearby Doctors Start
+                                nearbyDoctors()
+                                //Nearby Doctors End
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .clipped()
+                    //Scroller End
                 }
             }.edgesIgnoringSafeArea(.all)
                 .navigationBarBackButtonHidden(true)
+                .navigationBarHidden(true)
                 .toolbar {
                     Button("Sign Out") {
                         //TODO: Signout here
@@ -43,7 +114,7 @@ struct PatientHomeView: View {
 
 struct PatientHomeView_Previews: PreviewProvider {
     static var previews: some View {
-        PatientHomeView()
+        medication()
     }
 }
 
@@ -98,26 +169,6 @@ struct Header: View {
         )
     }
 
-}
-
-struct Scroller: View {
-    
-    var body: some View {
-        ScrollView(showsIndicators: false) {
-            ZStack {
-                VStack {
-                    //Most Popular
-                    catagory()
-                    //Upcoming Appointments
-                    upcomingAppointments()
-                    //Nearby Doctors
-                    nearbyDoctors()
-                }
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .clipped()
-    }
 }
 
 struct catagory: View {
@@ -184,15 +235,6 @@ struct catagory: View {
 
 struct upcomingAppointments: View {
     
-    let catagory: [catagoryModel] = [
-        .init(id: 0, title: .Diagnostic, image: "mascot", color: "1"),
-        .init(id: 1, title: .Shots, image: "mascot", color: "2"),
-        .init(id: 2, title: .Consultation, image: "mascot", color: "3"),
-        .init(id: 3, title: .Ambulance, image: "mascot", color: "4"),
-        .init(id: 4, title: .Nurse, image: "mascot", color: "5"),
-        .init(id: 5, title: .Medical_History, image: "mascot", color: "6")
-    ]
-    
     var body: some View {
         VStack {
             HStack {
@@ -206,14 +248,11 @@ struct upcomingAppointments: View {
             }
             .frame(alignment: .leading)
             .clipped()
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .center, spacing: 20) {
-                    ForEach(catagory, id: \.id){ post in
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(Color("lightAcc"))
-                            .frame(width: 340, height: 150)
-                    }
-                }
+            HStack(alignment: .center, spacing: 20) {
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(Color("lightAcc"))
+                    .frame(height: 150)
+                    .frame(maxWidth: .infinity)
             }
             .padding()
         }
