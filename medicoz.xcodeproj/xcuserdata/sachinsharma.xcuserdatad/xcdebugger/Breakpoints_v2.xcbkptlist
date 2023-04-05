@@ -3,4 +3,129 @@
    uuid = "7A8B75F3-5DD3-4F43-ACF8-D9EB46C021C1"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4F8678ED-9C41-4C65-A041-BE305BF814ED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "medicoz/Auth/redirectAuth.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "redirectAuth"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "4F8678ED-9C41-4C65-A041-BE305BF814ED - 8599412d665915e7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "medicoz.redirectAuth.init() -&gt; medicoz.redirectAuth"
+                  moduleName = "medicoz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinsharma/Desktop/medicoz/medicoz/Auth/redirectAuth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  uuid = "4F8678ED-9C41-4C65-A041-BE305BF814ED - f23bba39ea1ab1a8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "medicoz.redirectAuth.init(sessionManager: @autoclosure () -&gt; medicoz.SessionManager) -&gt; medicoz.redirectAuth"
+                  moduleName = "medicoz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinsharma/Desktop/medicoz/medicoz/Auth/redirectAuth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "4F8678ED-9C41-4C65-A041-BE305BF814ED - 8599412d665915c6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "medicoz.redirectAuth.init() -&gt; medicoz.redirectAuth"
+                  moduleName = "medicoz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinsharma/Desktop/medicoz/medicoz/Auth/redirectAuth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "264">
+               </Location>
+               <Location
+                  uuid = "4F8678ED-9C41-4C65-A041-BE305BF814ED - 64651d7017541069"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "medicoz.redirectAuth.init(role: Swift.String, sessionManager: @autoclosure () -&gt; medicoz.SessionManager) -&gt; medicoz.redirectAuth"
+                  moduleName = "medicoz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinsharma/Desktop/medicoz/medicoz/Auth/redirectAuth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  uuid = "4F8678ED-9C41-4C65-A041-BE305BF814ED - 215e3c8623944002"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of medicoz.redirectAuth.path : SwiftUI.NavigationPath"
+                  moduleName = "medicoz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinsharma/Desktop/medicoz/medicoz/Auth/redirectAuth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "4F8678ED-9C41-4C65-A041-BE305BF814ED - 8599412d66591599"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "medicoz.redirectAuth.init() -&gt; medicoz.redirectAuth"
+                  moduleName = "medicoz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinsharma/Desktop/medicoz/medicoz/Auth/redirectAuth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "260">
+               </Location>
+               <Location
+                  uuid = "4F8678ED-9C41-4C65-A041-BE305BF814ED - 64651d7017541036"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "medicoz.redirectAuth.init(role: Swift.String, sessionManager: @autoclosure () -&gt; medicoz.SessionManager) -&gt; medicoz.redirectAuth"
+                  moduleName = "medicoz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinsharma/Desktop/medicoz/medicoz/Auth/redirectAuth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "216">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

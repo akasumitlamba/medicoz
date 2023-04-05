@@ -14,6 +14,8 @@ struct patientHome: View {
     @State private var showImagePicker = false
     @State private var image: UIImage? = nil
     @State  var selectedTab = 0
+    @StateObject var sessionManager = SessionManager()
+
     var body: some View {
         ZStack {
             TabView(selection: $selectedTab){
@@ -23,10 +25,10 @@ struct patientHome: View {
                         Text("Home")
                     }
                     .tag(0)
-                appointmentView()
+                mainMessagesView()
                     .tabItem {
-                        Image(systemName: "calendar.badge.clock")
-                        Text("Appointments")
+                        Image(systemName: "message.fill")
+                        Text("Messages")
                     }.tag(2)
                 appointmentView()
                     .tabItem {
@@ -48,8 +50,13 @@ struct patientHome: View {
             }.edgesIgnoringSafeArea(.all)
                 .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
-            .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
-                imagePicker(image: $image)
+//            .fullScreenCover(isPresented: $sessionManager.patientDocumentNotFound, onDismiss: nil) {
+//                patientAccountSetup()
+//            }
+            .onAppear {
+                if Auth.auth().currentUser != nil {
+                    sessionManager.patientApiCall()
+                }
             }
         }
     }

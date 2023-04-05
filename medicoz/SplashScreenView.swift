@@ -15,13 +15,18 @@ struct SplashScreenView: View {
     
     @StateObject var sessionManager = SessionManager()
     
+    @AppStorage ("uid") var userID: String = ""
+    @AppStorage ("userRole") var role: String = ""
+    
     var body: some View {
         ZStack{
             if isActive {
-                ZStack {
-                    Main()
+                if userID == "" {
+                    sessionAuth()
+                } else {
+                    redirectAuth()
                 }
-            }
+             }
             else {
                 ZStack {
                     

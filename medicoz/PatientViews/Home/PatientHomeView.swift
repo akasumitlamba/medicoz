@@ -17,7 +17,7 @@ struct PatientHomeView: View {
         NavigationView {
             ZStack{
                 VStack{
-                    Header()
+                    patientHeader()
 
                     RoundedRectangle(cornerRadius: 0)
                         .fill(Color.gray)
@@ -118,7 +118,7 @@ struct PatientHomeView_Previews: PreviewProvider {
     }
 }
 
-struct Header: View {
+struct patientHeader: View {
     @Environment (\.dismiss) private var dismiss
     @State var logoutAlert = false
     @State var alertMessage = ""

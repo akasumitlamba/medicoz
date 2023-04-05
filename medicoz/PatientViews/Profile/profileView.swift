@@ -13,10 +13,25 @@ struct profileView: View {
     
     @Environment (\.dismiss) private var dismiss
     @State var editMode: Bool = false
+    @StateObject var sessionManager = SessionManager()
+    @State var logoutAlert = false
+    @AppStorage ("uid") var userID: String = ""
+
     
     var body: some View {
         NavigationView {
             ZStack{
+                if sessionManager.isLoading {
+                    Color.clear
+                        .background(
+                            Color.white
+                                .opacity(0.2)
+                                .blur(radius: 10)
+                        )
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(3)
+                }
                 VStack {
                     
                     VStack {
@@ -52,7 +67,7 @@ struct profileView: View {
                                             }.padding(.horizontal)
                                             Spacer()
                                         }.padding()
-                                )
+                                    )
                             }
                             
                             //Profle Sharing
@@ -84,10 +99,10 @@ struct profileView: View {
                                                         .padding(4)
                                                     }
                                             }
-
+                                            
                                             
                                         }.padding()
-                                )
+                                    )
                             }.padding(.vertical)
                             
                             //Details
@@ -100,10 +115,10 @@ struct profileView: View {
                                         editMode.toggle()
                                     } label: {
                                         Image(systemName: "square.and.pencil")
-                                            //.resizable()
+                                        //.resizable()
                                             .font(.title3)
                                     }
-
+                                    
                                 }
                                 
                                 VStack{
@@ -158,7 +173,7 @@ struct profileView: View {
                                     } label: {
                                         Image(systemName: "chevron.right")
                                     }
-
+                                    
                                 }
                                 
                                 HStack{
@@ -181,21 +196,40 @@ struct profileView: View {
                                 
                                 Button {
                                     //TODO: Signout here
-                                    do {
-                                        try Auth.auth().signOut()
-                                        print("Signed Out Successfully!")
-                                        dismiss()
-                                    } catch {
-                                            print("ERROR: Could not sign out!")
-                                    }
+                                    logoutAlert = true
                                 } label: {
                                     Text("Sign Out")
                                         .foregroundColor(.red)
                                         .frame(height: 35)
                                         .frame(maxWidth: .infinity)
                                 }.buttonStyle(.bordered)
-
+                                    .alert(isPresented: $logoutAlert) {
+                                        Alert(
+                                            title: Text("Logout"),
+                                            message: Text("Are you sure to Logout"),
+                                            primaryButton: .destructive(Text("OK"), action: {
+                                                // Handle button 1 action
+                                                do {
+                                                    try Auth.auth().signOut()
+                                                    sessionManager.userRole = nil
+                                                    sessionManager.isLoggedIn = false
+                                                    print("Signed Out Successfully!")
+                                                    withAnimation {
+                                                        userID = ""
+                                                    }
+                                                    
+                                                } catch {
+                                                    print("Error signing out: \(error.localizedDescription)")
+                                                }
+                                            }),
+                                            secondaryButton: .cancel(Text("Cancel"), action: {
+                                                // Handle button 2 action
+                                                
+                                            })
+                                        )
+                                    }
                                     
+                                
                                 
                             }.padding(.top, 30)
                             

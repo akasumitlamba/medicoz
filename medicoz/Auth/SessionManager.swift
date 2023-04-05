@@ -7,7 +7,10 @@
 
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 import SwiftUI
+import Darwin
+import Foundation
 
 enum UserRole: String {
     case role1 = "patient"
@@ -26,7 +29,25 @@ class SessionManager: ObservableObject {
     @Published var doctorDocumentFound = false
     @Published var isLoading = false
     @Published var path = NavigationPath()
-    //@AppStorage("UserRole") var UserRole: String = ""
+    
+    @Published private var image: UIImage? = nil
+    @Published var showAlert = false
+    @Published var alertMessages = ""
+    @Published private var name = ""
+    @Published var birthday: Date = Date()
+    @Published var gender = ""
+    @Published var weight: String = ""
+    @Published var bg: String = "choose"
+    var window: UIWindow?
+    
+    @Published var doc = false
+    @Published var pat = false
+    @Published var navTitleSheet = false
+    @Published var showView = true
+    @AppStorage ("uid") var userID: String = ""
+    @AppStorage ("userRole") var role: String = ""
+    @Published var patientDocumentNotFound = false
+    @Published var doctorDocumentNotFound = false
     
     
     func registerUser(email: String, password: String, role: String, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -37,11 +58,28 @@ class SessionManager: ObservableObject {
                 print("SignUp Error: \(error.localizedDescription)")
                 self.alertMessage = "SignUp Error: \(error.localizedDescription)"
                 self.showingAlert = true
-            } else if let user = result?.user {
+            }
+            
+            else if let user = result?.user {
+                let randomNumber = abs(UUID().hashValue) % 1000000000
+                let numericId = String(format: "%010d", randomNumber)
+
                 let userData = [
                     "email": user.email ?? "",
-                    "role": role
+                    "role": role,
+                    "uid": numericId
                 ]
+                
+                
+                    self.userID = user.uid
+                    if role == "patient" {
+                        self.patientApiCall()
+                        
+                    } else {
+                        self.doctorApiCall()
+                    }
+                
+                
                 Firestore.firestore().collection("users").document(user.uid).setData(userData) { error in
                     if let error = error {
                         print("Error adding user data to Firestore: \(error.localizedDescription)")
@@ -49,13 +87,20 @@ class SessionManager: ObservableObject {
                         self.showingAlert = true
                         completion(.failure(error))
                     } else {
-                        //self.user = User(uid: user.uid, email: user.email ?? "", role: role)
-                        self.isLoggedIn = true
-                        //completion(.success(self.user!))
+                        //self.user = User
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            self.isLoading = false
+                        }
                         print("User data added to Firestore")
                         print("Successfully Registered: \(result?.user.uid ?? "")")
                         //TODO: load next screen
-                        self.path.append("redirectAuth")
+                        self.isLoggedIn = true
+                        if role == "patient" {
+                            self.patientApiCall()
+                        } else {
+                            self.doctorApiCall()
+                        }
+                        self.isLoading = false
                     }
                 }
             }
@@ -69,33 +114,59 @@ class SessionManager: ObservableObject {
                 print("SignIn Error: \(error.localizedDescription)")
                 self.alertMessage = "SignIn Error: \(error.localizedDescription)"
                 self.showingAlert = true
-            } else {
-                print("Successfully LoggedIn: \(result?.user.uid ?? "")")
+            }
+            if let result = result {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.isLoading = false
+                }
+                withAnimation {
+                    self.userID = result.user.uid
+                    let numericId = result.user.uid.filter { "0123456789".contains($0) }
+                    print(numericId)
+                }
+                print("Successfully LoggedIn: \(result.user.uid)")
+                print("Successfully LoggedIn: \(result.user.uid.filter { "0123456789".contains($0) })")
                 //TODO: load next screen
-                self.path.append("redirectAuth")
                 self.isLoggedIn = true
                 self.fetchUserRole(completion: completion)
+                if self.userRole == .role1 {
+                    self.patientApiCall()
+                } else if self.userRole == .role2 {
+                    self.doctorApiCall()
+                }
             }
         }
     }
     
-    func loading() {
-        if isLoading {
-            // Full screen loader here
-            ZStack {
-                LinearGradient(gradient: Gradient(colors: [Color.green.opacity(0.2), Color.pink.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                    .edgesIgnoringSafeArea(.all)
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .scaleEffect(2)
+    func currUserLoginWithRole() {
+        if Auth.auth().currentUser != nil {
+            isLoggedIn = true
+            fetchUserRole { result in
+                switch result {
+                case .success(let role):
+                    // Handle the role that was fetched
+                    print("Fetched role: \(role)")
+                case .failure(let error):
+                    // Handle the error that occurred
+                    print("Error fetching role: \(error.localizedDescription)")
+                }
+            }
+        } else {
+            showView = true
+            if showView {
+                pat = true
+            } else {
+                doc = true
             }
         }
     }
+    
     func logout() {
         do {
-            try Firebase.Auth.auth().signOut()
-            isLoggedIn = false
+            try Auth.auth().signOut()
             userRole = nil
+            self.isLoggedIn = false
+            print("Signed Out Successfully!")
             
         } catch {
             print("Error signing out: \(error.localizedDescription)")
@@ -108,10 +179,16 @@ class SessionManager: ObservableObject {
             if let document = document, document.exists {
                 //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 self.patientDocumentFound = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.isLoading = false
+                }
                 //self.dataToDisplay = dataDescription
             } else {
                 print("Document does not exist")
                 self.patientDocumentFound = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.isLoading = false
+                }
             }
        }
     }
@@ -122,10 +199,16 @@ class SessionManager: ObservableObject {
             if let document = document, document.exists {
                 //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 self.doctorDocumentFound = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.isLoading = false
+                }
                 //self.dataToDisplay = dataDescription
             } else {
                 print("Document does not exist")
                 self.doctorDocumentFound = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.isLoading = false
+                }
             }
        }
     }
@@ -152,6 +235,7 @@ class SessionManager: ObservableObject {
             completion(.success(()))
         }
     }
+    
 }
 
 

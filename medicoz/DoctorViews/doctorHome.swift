@@ -10,33 +10,53 @@ import FirebaseAuth
 
 struct doctorHome: View {
     @Environment (\.dismiss) private var dismiss
+    @State private var showImagePicker = false
+    @State private var image: UIImage? = nil
+    @State  var selectedTab = 1
+    @StateObject var sessionManager = SessionManager()
+
+    
     var body: some View {
         ZStack {
-            VStack {
-                Text("Doctor Home")
-                VStack{
-                    Button {
-                        //TODO: Signout here
-                        do {
-                            try Auth.auth().signOut()
-                            print("Signed Out Successfully!")
-                            dismiss()
-                        } catch {
-                                print("ERROR: Could not sign out!")
-                        }
-                    } label: {
-                        Text("Sign Out")
-                            .foregroundColor(.red)
-                            .frame(height: 35)
-                            .frame(maxWidth: .infinity)
-                    }.buttonStyle(.bordered)
+            TabView(selection: $selectedTab){
+//                doctorHomeView(selectedTab: $selectedTab)
+//                    .tabItem {
+//                        Image(systemName: "house.fill")
+//                        Text("Home")
+//                    }
+//                    .tag(0)
+                doctorAppointmentView()
+                    .tabItem {
+                        Image(systemName: "calendar.badge.clock")
+                        Text("Appointments")
+                    }.tag(2)
+                appointmentView()
+                    .tabItem {
+                        Image(systemName: "plus.circle")
+                        Text("Appointments")
+                    }.tag(3)
+                
+                
+                doctorProfile()
+                    .tabItem {
+                        Image(systemName: "person")
+                        Text("Profile")
+                    }.tag(4)
 
-                        
-                    
-                }.padding(.top, 30)
+            }
+            
+            .edgesIgnoringSafeArea(.all)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+//            .fullScreenCover(isPresented: $sessionManager.doctorDocumentNotFound, onDismiss: nil) {
+//                doctorAccountSetup()
+//            }
+            .onAppear {
+                if Auth.auth().currentUser != nil {
+                    sessionManager.doctorApiCall()
+                }
             }
         }
-        
     }
 }
 

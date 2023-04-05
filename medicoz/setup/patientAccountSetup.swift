@@ -12,13 +12,15 @@ import FirebaseStorage
 
 struct patientAccountSetup: View {
     @Environment (\.dismiss) private var dismiss
+    @StateObject var sessionManager = SessionManager()
     
     @State private var showImagePicker = false
     @State private var image: UIImage? = nil
-    @State private var name = ""
+    
     
     @State private var male = false
     @State private var female = false
+    @State private var name = ""
     @State var birthday: Date = Date()
     @State var gender = ""
     @State var weight: String = ""
@@ -28,6 +30,9 @@ struct patientAccountSetup: View {
     
     @State var loginStatusMessage = ""
     @State var imageUrl = ""
+    
+    @AppStorage ("uid") var userID: String = ""
+
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -43,6 +48,18 @@ struct patientAccountSetup: View {
             ZStack{
                 LinearGradient(gradient: Gradient(colors: [Color.green.opacity(0.2), Color.pink.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
+                
+                if sessionManager.isLoading {
+                    Color.clear
+                        .background(
+                            Color.white
+                                .opacity(0.2)
+                                .blur(radius: 10)
+                        )
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(3)
+                }
                 
                 VStack{
                     ScrollView(.vertical, showsIndicators: false) {
@@ -207,7 +224,10 @@ struct patientAccountSetup: View {
                         //Save Button
                         VStack{
                             Button {
-                                uploadData()
+                                if !name.isEmpty && !gender.isEmpty && !weight.isEmpty && bg != "choose" {
+                                    uploadData()
+                                    sessionManager.isLoading = true
+                                }
                             } label: {
                                 Text("Save")
                                     .foregroundColor(.white)
@@ -232,7 +252,9 @@ struct patientAccountSetup: View {
                         do {
                             try Auth.auth().signOut()
                             print("Signed Out Successfully!")
-                            dismiss()
+                            withAnimation {
+                                userID = ""
+                            }
                         } catch {
                                 print("ERROR: Could not sign out!")
                         }
@@ -246,6 +268,7 @@ struct patientAccountSetup: View {
     private func getAlert() -> Alert {
         return Alert(title: Text(alertMessages), dismissButton: .default(Text("OK")))
     }
+    
     
     private func uploadData() {
         
@@ -282,16 +305,18 @@ struct patientAccountSetup: View {
                 }
                 
                 
-                let data = ["name": name, "imageURL": downloadURL.absoluteString, "birthday": birthday, "gender": gender, "weight": weight, "bloodGroup": bg]
+                let data = ["name": name, "imageURL": downloadURL.absoluteString, "birthday": birthday, "gender": gender, "weight": weight, "bloodGroup": bg] as [String : Any]
                 Firestore.firestore().collection("patients").document(uid).setData(data) { error in
                     if let error = error {
                         print("Error adding document: \(error.localizedDescription)")
                         showAlert.toggle()
                         alertMessages = "\(String(describing: error.localizedDescription))"
                     } else {
+                        
                         print("Document added successfully")
-                        showAlert.toggle()
-                        alertMessages = " Document added succefully"
+                        sessionManager.isLoading = false
+                        sessionManager.patientDocumentFound = true
+                        sessionManager.patientDocumentNotFound = false
                     }
                 }
             }

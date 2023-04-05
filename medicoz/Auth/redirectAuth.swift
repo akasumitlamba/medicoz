@@ -10,32 +10,39 @@ import Firebase
 
 struct redirectAuth: View {
     
+    @AppStorage ("userRole") var userRole: String = ""
     @StateObject var sessionManager = SessionManager()
-    @Environment (\.dismiss) private var dismiss
+    @AppStorage ("uid") var userID: String = ""
+
+    //@Environment (\.dismiss) private var dismiss
     
     var body: some View {
-        ZStack {
-            
-            if sessionManager.isLoading {
-                // Full screen loader here
-                ZStack {
-                    LinearGradient(gradient: Gradient(colors: [Color.green.opacity(0.2), Color.pink.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                        .edgesIgnoringSafeArea(.all)
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                        .scaleEffect(2)
-                }
-            }
-            else {
-                VStack{
-                    
-                    if sessionManager.userRole == .role1 {
+        NavigationView {
+            ZStack {
+                
+                if sessionManager.isLoading {
+                    ZStack {
+                        LinearGradient(gradient: Gradient(colors: [Color.green.opacity(0.2), Color.pink.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                            .edgesIgnoringSafeArea(.all)
+                        
+                        Color.clear
+                            .background(
+                                Color.white
+                                    .opacity(0.2)
+                                    .blur(radius: 10)
+                            )
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .scaleEffect(3)
+                    }
+                } else {
+                    if userRole == "patient" {
                         if sessionManager.patientDocumentFound {
                             patientHome()
                         } else {
                             patientAccountSetup()
                         }
-                    } else if sessionManager.userRole == .role2 {
+                    } else {
                         if sessionManager.doctorDocumentFound {
                             doctorHome()
                         } else {
@@ -43,29 +50,31 @@ struct redirectAuth: View {
                         }
                     }
                 }
-            }
                 
-        }.onAppear {
-            // Show loader when view appears
-            sessionManager.isLoading = true
-            
-            if sessionManager.userRole == .role1 {
-                sessionManager.patientApiCall()
-            } else if sessionManager.userRole == .role2 {
-                sessionManager.doctorApiCall()
+                
+                
             }
-            // Simulate loading time
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                sessionManager.isLoading = false
+            .onAppear {
+                // Show loader when view appears
+                sessionManager.isLoading = true
+                if Auth.auth().currentUser != nil {
+                    sessionManager.isLoggedIn = true
+                    if userRole == "patient" {
+                        sessionManager.patientApiCall()
+                    } else {
+                        sessionManager.doctorApiCall()
+                    }
+                }
             }
-        }.edgesIgnoringSafeArea(.all).navigationBarBackButtonHidden(true).navigationBarHidden(true)
+            .edgesIgnoringSafeArea(.all).navigationBarBackButtonHidden(true).navigationBarHidden(true)
+        }
     }
+    
 }
-
-
-
-struct redirectAuth_Previews: PreviewProvider {
-    static var previews: some View {
-        redirectAuth()
+    
+    struct redirectAuth_Previews: PreviewProvider {
+        static var previews: some View {
+            redirectAuth()
+        }
     }
-}
+
