@@ -12,9 +12,7 @@ struct sessionAuth: View {
     @StateObject var sessionManager = SessionManager()
     @State private var currentViewShowing: String = "patient" // login or signup
     @AppStorage ("userRole") var userRole: String = ""
-    
-    
-    
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -100,34 +98,7 @@ struct sessionAuth: View {
                     .presentationDetents([.fraction(0.40)])
                 }
             }
-            
-            .onAppear() {
-                if Auth.auth().currentUser != nil {
-                    
-                    sessionManager.isLoggedIn = true
-                    sessionManager.fetchUserRole { result in
-                        switch result {
-                        case .success(let role):
-                            // Handle the role that was fetched
-                            print("Fetched role: \(role)")
-                        case .failure(let error):
-                            // Handle the error that occurred
-                            print("Error fetching role: \(error.localizedDescription)")
-                        }
-                    }
-                } else {
-                    sessionManager.isLoggedIn = false
-                    sessionManager.showView = true
-                    
-                    if sessionManager.showView {
-                        sessionManager.pat = true
-                        sessionManager.doc = false
-                    } else {
-                        sessionManager.doc = true
-                        sessionManager.pat = false
-                    }
-                }
-            }
+
         }
     }
 }

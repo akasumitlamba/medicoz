@@ -16,6 +16,8 @@ struct profileView: View {
     @StateObject var sessionManager = SessionManager()
     @State var logoutAlert = false
     @AppStorage ("uid") var userID: String = ""
+    @AppStorage ("userRole") var userRole: String = ""
+
 
     
     var body: some View {
@@ -216,6 +218,7 @@ struct profileView: View {
                                                     print("Signed Out Successfully!")
                                                     withAnimation {
                                                         userID = ""
+                                                        userRole = ""
                                                     }
                                                     
                                                 } catch {

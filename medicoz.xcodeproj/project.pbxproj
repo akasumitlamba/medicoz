@@ -14,6 +14,8 @@
 		AD428ADB29DB098700351BC3 /* titleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428ADA29DB098700351BC3 /* titleRow.swift */; };
 		AD428ADD29DB13F800351BC3 /* mainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */; };
 		AD428AE029DC58DA00351BC3 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428ADF29DC58DA00351BC3 /* MessageViewModel.swift */; };
+		AD428AE329DD68FF00351BC3 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AD428AE229DD68FF00351BC3 /* SDWebImageSwiftUI */; };
+		AD428AE529DD72FA00351BC3 /* testU.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428AE429DD72FA00351BC3 /* testU.swift */; };
 		AD51A3972997FFED007926BB /* userModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD51A3962997FFED007926BB /* userModel.swift */; };
 		AD529071299F3C3800425FD7 /* profileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD529070299F3C3800425FD7 /* profileView.swift */; };
 		AD529075299F489900425FD7 /* TruenoRound.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD529074299F489800425FD7 /* TruenoRound.otf */; };
@@ -66,6 +68,7 @@
 		AD428ADA29DB098700351BC3 /* titleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleRow.swift; sourceTree = "<group>"; };
 		AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainMessagesView.swift; sourceTree = "<group>"; };
 		AD428ADF29DC58DA00351BC3 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		AD428AE429DD72FA00351BC3 /* testU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testU.swift; sourceTree = "<group>"; };
 		AD51A3962997FFED007926BB /* userModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userModel.swift; sourceTree = "<group>"; };
 		AD529070299F3C3800425FD7 /* profileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileView.swift; sourceTree = "<group>"; };
 		AD529074299F489800425FD7 /* TruenoRound.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TruenoRound.otf; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD428AE329DD68FF00351BC3 /* SDWebImageSwiftUI in Frameworks */,
 				ADAB9305299031C500F8D1FA /* FirebaseDatabase in Frameworks */,
 				ADAB9309299031C500F8D1FA /* FirebaseStorage in Frameworks */,
 				ADAB9303299031C500F8D1FA /* FirebaseAuth in Frameworks */,
@@ -237,6 +241,7 @@
 				ADAB931A2990326100F8D1FA /* fonts */,
 				ADAB92F92990314500F8D1FA /* Preview Content */,
 				ADAB92F72990314500F8D1FA /* Assets.xcassets */,
+				AD428AE429DD72FA00351BC3 /* testU.swift */,
 			);
 			path = medicoz;
 			sourceTree = "<group>";
@@ -373,6 +378,7 @@
 				ADAB9304299031C500F8D1FA /* FirebaseDatabase */,
 				ADAB9306299031C500F8D1FA /* FirebaseFirestore */,
 				ADAB9308299031C500F8D1FA /* FirebaseStorage */,
+				AD428AE229DD68FF00351BC3 /* SDWebImageSwiftUI */,
 			);
 			productName = medicoz;
 			productReference = ADAB92F02990314400F8D1FA /* medicoz.app */;
@@ -404,6 +410,7 @@
 			mainGroup = ADAB92E72990314400F8D1FA;
 			packageReferences = (
 				ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AD428AE129DD68FF00351BC3 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = ADAB92F12990314400F8D1FA /* Products */;
 			projectDirPath = "";
@@ -454,6 +461,7 @@
 				ADAB93CE2990334000F8D1FA /* patientFormModel.swift in Sources */,
 				AD529071299F3C3800425FD7 /* profileView.swift in Sources */,
 				ADAB93B0299032E100F8D1FA /* patientHome.swift in Sources */,
+				AD428AE529DD72FA00351BC3 /* testU.swift in Sources */,
 				AD90B895299B6523005F932F /* redirectAuth.swift in Sources */,
 				AD11453229D84EDD00627FCE /* patientAuth.swift in Sources */,
 				AD428ADD29DB13F800351BC3 /* mainMessagesView.swift in Sources */,
@@ -678,6 +686,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AD428AE129DD68FF00351BC3 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -689,6 +705,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AD428AE229DD68FF00351BC3 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD428AE129DD68FF00351BC3 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		ADAB9302299031C500F8D1FA /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -11,6 +11,8 @@ import FirebaseStorage
 
 struct doctorAccountSetup: View {
     @Environment (\.dismiss) private var dismiss
+    @Environment (\.presentationMode) var presentationMode
+
     @StateObject var sessionManager = SessionManager()
     
     @State private var showImagePicker = false
@@ -29,7 +31,8 @@ struct doctorAccountSetup: View {
     
     @State var loginStatusMessage = ""
     @State var imageUrl = ""
-    @AppStorage ("userRole") var role: String = ""
+    @AppStorage ("userRole") var userRole: String = ""
+    @AppStorage ("uid") var userID: String = ""
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -38,13 +41,36 @@ struct doctorAccountSetup: View {
     }
     
     @State var showAlert = false
-    @State var alertMessages = ""
+    @State var alertMessage = ""
+    
+    @Binding var email: String
+    @Binding var password: String
     
     var body: some View {
         NavigationView {
             ZStack{
                 LinearGradient(gradient: Gradient(colors: [Color.green.opacity(0.2), Color.pink.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
+                
+                if sessionManager.isLoading {
+                    ZStack {
+                            
+                            
+                            Color.clear
+                                .background(
+                                    Color.white
+                                        .opacity(0.2)
+                                        .blur(radius: 10)
+                                )
+                        VStack {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .scaleEffect(3).padding(20)
+                            Text("Wait and take a Sip of Tea")
+                                .font(.title3)
+                        }
+                    }
+                }
                 
                 VStack{
                     ScrollView(.vertical, showsIndicators: false) {
@@ -209,11 +235,24 @@ struct doctorAccountSetup: View {
                         //Save Button
                         VStack{
                             Button {
-                                if !name.isEmpty && !gender.isEmpty && !regNo.isEmpty && bg != "choose" {
-                                    uploadData()
+                                if name.isEmpty {
+                                    showAlert.toggle()
+                                    alertMessage = ("Enter Your Name")
                                 }
+                                userRole = "doctor"
+                                sessionManager.isLoading = true
+                                registerUser(email: email, password: password, role: userRole) { result in
+                                    switch result {
+                                    case .success:
+                                        break
+                                    case .failure(let error):
+                                        alertMessage = error.localizedDescription
+                                        showAlert = true
+                                    }
+                                }
+                                
                             } label: {
-                                Text("Save")
+                                Text("Create Account")
                                     .foregroundColor(.white)
                                     .font(.custom("Poppins-Regular", size: 20))
                                     .frame(width: 340, height: 55)
@@ -231,24 +270,34 @@ struct doctorAccountSetup: View {
                     }
             }.navigationBarBackButtonHidden(true)
                 .toolbar {
-                    Button("Sign Out") {
-                        //TODO: Signout here
-                        do {
-                            try Auth.auth().signOut()
-                            print("Signed Out Successfully!")
-                            dismiss()
-                        } catch {
-                                print("ERROR: Could not sign out!")
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Close") {
+                            presentationMode.wrappedValue.dismiss()
                         }
                     }
-            }
+                }
         }
-        
     }
     
     
     private func getAlert() -> Alert {
-        return Alert(title: Text(alertMessages), dismissButton: .default(Text("OK")))
+        return Alert(title: Text(alertMessage), dismissButton: .default(Text("OK")))
+    }
+    
+    func registerUser(email: String, password: String, role: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) {
+            result, error in
+            if let error = error {//login error occured
+                completion(.failure(error))
+                print("SignUp Error: \(error.localizedDescription)")
+                alertMessage = "SignUp Error: \(error.localizedDescription)"
+                showAlert = true
+            }
+            
+            else if (result?.user) != nil {
+                uploadData()
+            }
+        }
     }
     
     private func uploadData() {
@@ -258,14 +307,14 @@ struct doctorAccountSetup: View {
         guard let image = image else {
             print("Image not found")
             showAlert.toggle()
-            alertMessages = ("Image not found")
+            alertMessage = ("Image not found")
             return
         }
         
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
             print("Error converting image to data")
             showAlert.toggle()
-            alertMessages = ("Image Error")
+            alertMessage = ("Image Error")
             return
         }
         
@@ -281,22 +330,32 @@ struct doctorAccountSetup: View {
                 guard let downloadURL = url else {
                     print("Error getting download URL: \(error?.localizedDescription ?? "")")
                     showAlert.toggle()
-                    alertMessages = "\(String(describing: error?.localizedDescription))"
+                    alertMessage = "\(String(describing: error?.localizedDescription))"
                     return
                 }
                 
+    
+                let data = ["name": name,
+                            "profileImageURL": downloadURL.absoluteString,
+                            "birthday": birthday,
+                            "gender": gender,
+                            "regNo": regNo,
+                            "bloodGroup": bg] as [String : Any]
                 
-                let data = ["name": name, "imageURL": downloadURL.absoluteString, "birthday": birthday, "gender": gender, "regNo": regNo, "bloodGroup": bg] as [String : Any]
-                Firestore.firestore().collection("doctors").document(uid).setData(data) { error in
+                Firestore.firestore().collection("users").document(uid).setData(data) { error in
                     if let error = error {
                         print("Error adding document: \(error.localizedDescription)")
                         showAlert.toggle()
-                        alertMessages = "\(String(describing: error.localizedDescription))"
+                        alertMessage = "\(String(describing: error.localizedDescription))"
                     } else {
                         print("Document added successfully")
-                        sessionManager.isLoading = false
-                        sessionManager.doctorDocumentFound = true
-                        sessionManager.doctorDocumentNotFound = false
+                        sessionManager.isLoggedIn = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            sessionManager.isLoading = false
+                        }
+                        withAnimation {
+                            self.userID = uid
+                        }
                     }
                 }
             }
@@ -306,7 +365,7 @@ struct doctorAccountSetup: View {
             if let error = snapshot.error {
                 print("Error uploading image: \(error.localizedDescription)")
                 showAlert.toggle()
-                alertMessages = "Error uploading image: \(error.localizedDescription)"
+                alertMessage = "Error uploading image: \(error.localizedDescription)"
                 
             }
         }
@@ -315,8 +374,3 @@ struct doctorAccountSetup: View {
     
 }
 
-struct doctorAccountSetup_Previews: PreviewProvider {
-    static var previews: some View {
-        doctorAccountSetup()
-    }
-}

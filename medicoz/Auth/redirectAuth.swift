@@ -22,47 +22,39 @@ struct redirectAuth: View {
                 
                 if sessionManager.isLoading {
                     ZStack {
-                        LinearGradient(gradient: Gradient(colors: [Color.green.opacity(0.2), Color.pink.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                            .edgesIgnoringSafeArea(.all)
                         
-                        Color.clear
-                            .background(
-                                Color.white
-                                    .opacity(0.2)
-                                    .blur(radius: 10)
-                            )
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                            .scaleEffect(3)
+                            LinearGradient(gradient: Gradient(colors: [Color.green.opacity(0.2), Color.pink.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                                .edgesIgnoringSafeArea(.all)
+                            
+                            Color.clear
+                                .background(
+                                    Color.white
+                                        .opacity(0.2)
+                                        .blur(radius: 10)
+                                )
+                        VStack {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .scaleEffect(3).padding(20)
+                            Text("Wait and take a Sip of Tea")
+                                .font(.title3)
+                        }
                     }
                 } else {
                     if userRole == "patient" {
-                        if sessionManager.patientDocumentFound {
-                            patientHome()
-                        } else {
-                            patientAccountSetup()
-                        }
+                        patientHome()
                     } else {
-                        if sessionManager.doctorDocumentFound {
-                            doctorHome()
-                        } else {
-                            doctorAccountSetup()
-                        }
+                        doctorHome()
                     }
                 }
-                
-                
-                
             }
             .onAppear {
                 // Show loader when view appears
                 sessionManager.isLoading = true
                 if Auth.auth().currentUser != nil {
                     sessionManager.isLoggedIn = true
-                    if userRole == "patient" {
-                        sessionManager.patientApiCall()
-                    } else {
-                        sessionManager.doctorApiCall()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        sessionManager.isLoading = false
                     }
                 }
             }

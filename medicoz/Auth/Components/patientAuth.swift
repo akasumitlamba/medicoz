@@ -25,7 +25,7 @@ struct patientAuth: View {
     @State private var buttonsDisabled = true
     @State private var path = NavigationPath ()
     @FocusState private var focusField: Field?
-    var window: UIWindow?
+    @State var accountSetup = false
     
     @Binding var currentShowingView: String
     @AppStorage ("userRole") var userRole: String = ""
@@ -83,14 +83,10 @@ struct patientAuth: View {
                             
                             //header
                             HStack {
-                                Button {
-                                    isLoginMode = true
-                                }label: {
-                                    Text(isLoginMode ? "Sign In" : "Sign Up")
-                                        .bold()
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                }
+                                Text(isLoginMode ? "Sign In" : "Sign Up")
+                                    .bold()
+                                    .font(.title)
+                                    .foregroundColor(.black)
                                 Spacer()
                             }.padding(.all)
                             
@@ -159,7 +155,7 @@ struct patientAuth: View {
                         VStack {
                             VStack {
                                 Button {
-                                    userRole = "patient"
+                                    
                                     sessionManager.isLoading = true
                                     if isLoginMode {
                                         sessionManager.authenticateUser(email: email, password: password) { result in
@@ -173,19 +169,11 @@ struct patientAuth: View {
                                         }
                                     }
                                     else {
-                                        sessionManager.registerUser(email: email, password: password, role: role) { result in
-                                            switch result {
-                                            case .success:
-                                                break
-                                            case .failure(let error):
-                                                alertMessage = error.localizedDescription
-                                                showingAlert = true
-                                            }
-                                        }
+                                        accountSetup.toggle()
                                     }
                                 }
                             label: {
-                                Text(isLoginMode ? "Sign In" : "Sign Up")
+                                Text(isLoginMode ? "Sign In" : "Next")
                                     .fontWeight(.medium)
                                     .frame(width: 300, height: 5)
                             }
@@ -291,25 +279,13 @@ struct patientAuth: View {
                     .presentationDetents([.fraction(0.40)])
                 }
             }
+            .fullScreenCover(isPresented: $accountSetup) {
+                patientAccountSetup(email: $email, password: $password)
+            }
             
             
         }.alert(alertMessage, isPresented: $showingAlert) {
             Button("OK", role: .cancel) {}
-        }
-        .onAppear {
-            sessionManager.isLoading = false
-            //if already logged in skip to main screen
-            if Auth.auth().currentUser != nil {
-                print("Login Successfully")
-                path.append("redirectAuth")
-            }
-        }
-    }
-    
-    func redirectToHome() {
-        DispatchQueue.main.async {
-            let homeView = patientHome()
-            self.window?.rootViewController = UIHostingController(rootView: homeView)
         }
     }
     

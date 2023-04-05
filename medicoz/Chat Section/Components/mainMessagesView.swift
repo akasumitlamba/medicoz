@@ -10,6 +10,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 import FirebaseFirestore
+import SDWebImageSwiftUI
 
 
 
@@ -22,9 +23,13 @@ struct mainMessagesView: View {
     private var customNavBar: some View {
         HStack(spacing: 16) {
             
-            Image(systemName: "person.fill")
-                .font(.system(size: 34, weight: .heavy))
-                .foregroundColor(.white)
+            WebImage(url: URL(string: viewModel.patientData?.profileImage ?? ""))
+                .resizable()
+                .scaledToFill()
+                .frame(width: 50, height: 50)
+                .clipped()
+                .cornerRadius(50)
+
             
             VStack(alignment: .leading, spacing: 4) {
                 Text("\(viewModel.patientData?.name ?? "")")

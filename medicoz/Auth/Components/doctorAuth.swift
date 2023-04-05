@@ -25,6 +25,7 @@ struct doctorAuth: View {
     @State private var buttonsDisabled = true
     @State private var path = NavigationPath ()
     @FocusState private var focusField: Field?
+    @State var accountSetup = false
     
     @Binding var currentShowingView: String
     @AppStorage ("userRole") var userRole: String = ""
@@ -40,18 +41,7 @@ struct doctorAuth: View {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color.green.opacity(0.2), Color.pink.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
-                
-//                if sessionManager.isLoading {
-//                    Color.clear
-//                        .background(
-//                            Color.white
-//                                .opacity(0.2)
-//                                .blur(radius: 10)
-//                        )
-//                    ProgressView()
-//                        .progressViewStyle(.circular)
-//                        .scaleEffect(3)
-//                }
+            
                 
                 VStack {
                     VStack {
@@ -92,14 +82,10 @@ struct doctorAuth: View {
                             
                             //header
                             HStack {
-                                Button {
-                                    isLoginMode = true
-                                }label: {
-                                    Text(isLoginMode ? "Sign In" : "Sign Up")
-                                        .bold()
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                }
+                                Text(isLoginMode ? "Sign In" : "Sign Up")
+                                    .bold()
+                                    .font(.title)
+                                    .foregroundColor(.black)
                                 Spacer()
                             }.padding(.all)
                             
@@ -182,20 +168,11 @@ struct doctorAuth: View {
                                         }
                                     }
                                     else {
-                                        sessionManager.registerUser(email: email, password: password, role: role) { result in
-                                            switch result {
-                                            case .success:
-                                                break
-                                            case .failure(let error):
-                                                alertMessage = error.localizedDescription
-                                                showingAlert = true
-                                            }
-                                        }
+                                        accountSetup.toggle()
                                     }
-                                    isLoading.toggle()
                                 }
                             label: {
-                                Text(isLoginMode ? "Sign In" : "Sign Up")
+                                Text(isLoginMode ? "Sign In" : "Next")
                                     .fontWeight(.medium)
                                     .frame(width: 300, height: 5)
                             }
@@ -301,18 +278,13 @@ struct doctorAuth: View {
                     .presentationDetents([.fraction(0.40)])
                 }
             }
+            .fullScreenCover(isPresented: $accountSetup) {
+                doctorAccountSetup(email: $email, password: $password)
+            }
             
             
         }.alert(alertMessage, isPresented: $showingAlert) {
             Button("OK", role: .cancel) {}
-        }
-        .onAppear {
-            
-            //if already logged in skip to main screen
-            if Auth.auth().currentUser != nil {
-                print("Login Successfully")
-                path.append("redirectAuth")
-            }
         }
     }
     

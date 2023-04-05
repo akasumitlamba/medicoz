@@ -116,6 +116,8 @@ class SessionManager: ObservableObject {
                 self.showingAlert = true
             }
             if let result = result {
+                //TODO: load next screen
+                self.isLoggedIn = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.isLoading = false
                 }
@@ -123,14 +125,6 @@ class SessionManager: ObservableObject {
                     self.userID = result.user.uid
                 }
                 print("Successfully LoggedIn: \(result.user.uid)")
-                //TODO: load next screen
-                self.isLoggedIn = true
-                self.fetchUserRole(completion: completion)
-                if self.userRole == .role1 {
-                    self.patientApiCall()
-                } else if self.userRole == .role2 {
-                    self.doctorApiCall()
-                }
             }
         }
     }
