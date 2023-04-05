@@ -31,6 +31,7 @@ class MessageViewModel: ObservableObject {
     @Published var patientData: PatientData?
     @Published var doctorData: DoctorData?
     
+    
     init() {
         fetchCurrentUser()
     }

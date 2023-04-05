@@ -29,6 +29,7 @@ struct doctorAccountSetup: View {
     
     @State var loginStatusMessage = ""
     @State var imageUrl = ""
+    @AppStorage ("userRole") var role: String = ""
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()

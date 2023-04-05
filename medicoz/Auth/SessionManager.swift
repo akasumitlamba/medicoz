@@ -121,11 +121,8 @@ class SessionManager: ObservableObject {
                 }
                 withAnimation {
                     self.userID = result.user.uid
-                    let numericId = result.user.uid.filter { "0123456789".contains($0) }
-                    print(numericId)
                 }
                 print("Successfully LoggedIn: \(result.user.uid)")
-                print("Successfully LoggedIn: \(result.user.uid.filter { "0123456789".contains($0) })")
                 //TODO: load next screen
                 self.isLoggedIn = true
                 self.fetchUserRole(completion: completion)
