@@ -336,7 +336,7 @@ struct doctorAccountSetup: View {
                 
     
                 let data = ["name": name,
-                            "profileImageURL": downloadURL.absoluteString,
+                            "profileImage": downloadURL.absoluteString,
                             "birthday": birthday,
                             "gender": gender,
                             "regNo": regNo,

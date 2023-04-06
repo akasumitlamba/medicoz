@@ -11,11 +11,13 @@
 		AD11453229D84EDD00627FCE /* patientAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453129D84EDD00627FCE /* patientAuth.swift */; };
 		AD11453429D863AA00627FCE /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453329D863AA00627FCE /* SessionManager.swift */; };
 		AD11453729D8662800627FCE /* doctorHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453629D8662800627FCE /* doctorHome.swift */; };
+		AD349D9729DE8E9000C8B94E /* locationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD349D9629DE8E9000C8B94E /* locationView.swift */; };
 		AD428ADB29DB098700351BC3 /* titleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428ADA29DB098700351BC3 /* titleRow.swift */; };
 		AD428ADD29DB13F800351BC3 /* mainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */; };
-		AD428AE029DC58DA00351BC3 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428ADF29DC58DA00351BC3 /* MessageViewModel.swift */; };
 		AD428AE329DD68FF00351BC3 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AD428AE229DD68FF00351BC3 /* SDWebImageSwiftUI */; };
 		AD428AE529DD72FA00351BC3 /* testU.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428AE429DD72FA00351BC3 /* testU.swift */; };
+		AD428AE929DDB02400351BC3 /* chatSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428AE829DDB02400351BC3 /* chatSection.swift */; };
+		AD428AEB29DDB3F900351BC3 /* appointmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428AEA29DDB3F900351BC3 /* appointmentModel.swift */; };
 		AD51A3972997FFED007926BB /* userModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD51A3962997FFED007926BB /* userModel.swift */; };
 		AD529071299F3C3800425FD7 /* profileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD529070299F3C3800425FD7 /* profileView.swift */; };
 		AD529075299F489900425FD7 /* TruenoRound.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD529074299F489800425FD7 /* TruenoRound.otf */; };
@@ -46,12 +48,9 @@
 		ADAB93B4299032E100F8D1FA /* medicalHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93AB299032E100F8D1FA /* medicalHistory.swift */; };
 		ADAB93B7299032E100F8D1FA /* appointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93AE299032E100F8D1FA /* appointmentView.swift */; };
 		ADAB93C22990333400F8D1FA /* appointmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93BD2990333300F8D1FA /* appointmentCard.swift */; };
-		ADAB93CA2990334000F8D1FA /* dataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C52990334000F8D1FA /* dataManager.swift */; };
-		ADAB93CB2990334000F8D1FA /* appointmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C62990334000F8D1FA /* appointmentModel.swift */; };
+		ADAB93CA2990334000F8D1FA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C52990334000F8D1FA /* DataManager.swift */; };
 		ADAB93CD2990334000F8D1FA /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C82990334000F8D1FA /* Patient.swift */; };
-		ADAB93CE2990334000F8D1FA /* patientFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C92990334000F8D1FA /* patientFormModel.swift */; };
 		ADB5840B29D9668A00F47A76 /* doctorHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5840A29D9668A00F47A76 /* doctorHomeView.swift */; };
-		ADB5840D29D96E5C00F47A76 /* doctorAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5840C29D96E5C00F47A76 /* doctorAppointmentView.swift */; };
 		ADB5840F29D96E8D00F47A76 /* interactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5840E29D96E8D00F47A76 /* interactionHistory.swift */; };
 		ADB5841129D96E9E00F47A76 /* doctorProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5841029D96E9E00F47A76 /* doctorProfile.swift */; };
 		ADB5841B29D9C68500F47A76 /* sessionAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5841A29D9C68500F47A76 /* sessionAuth.swift */; };
@@ -65,10 +64,12 @@
 		AD11453129D84EDD00627FCE /* patientAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientAuth.swift; sourceTree = "<group>"; };
 		AD11453329D863AA00627FCE /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		AD11453629D8662800627FCE /* doctorHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorHome.swift; sourceTree = "<group>"; };
+		AD349D9629DE8E9000C8B94E /* locationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationView.swift; sourceTree = "<group>"; };
 		AD428ADA29DB098700351BC3 /* titleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleRow.swift; sourceTree = "<group>"; };
 		AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainMessagesView.swift; sourceTree = "<group>"; };
-		AD428ADF29DC58DA00351BC3 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		AD428AE429DD72FA00351BC3 /* testU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testU.swift; sourceTree = "<group>"; };
+		AD428AE829DDB02400351BC3 /* chatSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatSection.swift; sourceTree = "<group>"; };
+		AD428AEA29DDB3F900351BC3 /* appointmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appointmentModel.swift; sourceTree = "<group>"; };
 		AD51A3962997FFED007926BB /* userModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userModel.swift; sourceTree = "<group>"; };
 		AD529070299F3C3800425FD7 /* profileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileView.swift; sourceTree = "<group>"; };
 		AD529074299F489800425FD7 /* TruenoRound.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TruenoRound.otf; sourceTree = "<group>"; };
@@ -97,12 +98,9 @@
 		ADAB93AB299032E100F8D1FA /* medicalHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = medicalHistory.swift; sourceTree = "<group>"; };
 		ADAB93AE299032E100F8D1FA /* appointmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appointmentView.swift; sourceTree = "<group>"; };
 		ADAB93BD2990333300F8D1FA /* appointmentCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appointmentCard.swift; sourceTree = "<group>"; };
-		ADAB93C52990334000F8D1FA /* dataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataManager.swift; sourceTree = "<group>"; };
-		ADAB93C62990334000F8D1FA /* appointmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appointmentModel.swift; sourceTree = "<group>"; };
+		ADAB93C52990334000F8D1FA /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		ADAB93C82990334000F8D1FA /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
-		ADAB93C92990334000F8D1FA /* patientFormModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = patientFormModel.swift; sourceTree = "<group>"; };
 		ADB5840A29D9668A00F47A76 /* doctorHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorHomeView.swift; sourceTree = "<group>"; };
-		ADB5840C29D96E5C00F47A76 /* doctorAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorAppointmentView.swift; sourceTree = "<group>"; };
 		ADB5840E29D96E8D00F47A76 /* interactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interactionHistory.swift; sourceTree = "<group>"; };
 		ADB5841029D96E9E00F47A76 /* doctorProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorProfile.swift; sourceTree = "<group>"; };
 		ADB5841A29D9C68500F47A76 /* sessionAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sessionAuth.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				AD428ADA29DB098700351BC3 /* titleRow.swift */,
-				AD428ADF29DC58DA00351BC3 /* MessageViewModel.swift */,
 				AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */,
 			);
 			path = Components;
@@ -177,6 +174,7 @@
 		AD52907B299FF23000425FD7 /* Appointment */ = {
 			isa = PBXGroup;
 			children = (
+				AD428AEA29DDB3F900351BC3 /* appointmentModel.swift */,
 				ADAB93BD2990333300F8D1FA /* appointmentCard.swift */,
 				ADAB93AE299032E100F8D1FA /* appointmentView.swift */,
 			);
@@ -306,11 +304,10 @@
 		ADAB93C42990334000F8D1FA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ADAB93C52990334000F8D1FA /* dataManager.swift */,
-				ADAB93C62990334000F8D1FA /* appointmentModel.swift */,
+				ADAB93C52990334000F8D1FA /* DataManager.swift */,
 				ADAB93C82990334000F8D1FA /* Patient.swift */,
-				ADAB93C92990334000F8D1FA /* patientFormModel.swift */,
 				AD51A3962997FFED007926BB /* userModel.swift */,
+				AD349D9629DE8E9000C8B94E /* locationView.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,7 +323,7 @@
 		ADB5840629D9662800F47A76 /* Appointment */ = {
 			isa = PBXGroup;
 			children = (
-				ADB5840C29D96E5C00F47A76 /* doctorAppointmentView.swift */,
+				AD428AE829DDB02400351BC3 /* chatSection.swift */,
 			);
 			path = Appointment;
 			sourceTree = "<group>";
@@ -452,19 +449,18 @@
 				AD529078299FD70500425FD7 /* editProfile.swift in Sources */,
 				ADAB93B7299032E100F8D1FA /* appointmentView.swift in Sources */,
 				ADAB92F62990314400F8D1FA /* ContentView.swift in Sources */,
-				ADB5840D29D96E5C00F47A76 /* doctorAppointmentView.swift in Sources */,
-				ADAB93CB2990334000F8D1FA /* appointmentModel.swift in Sources */,
 				ADB5841B29D9C68500F47A76 /* sessionAuth.swift in Sources */,
 				AD11453029D84ED200627FCE /* doctorAuth.swift in Sources */,
 				ADB5840F29D96E8D00F47A76 /* interactionHistory.swift in Sources */,
+				AD428AEB29DDB3F900351BC3 /* appointmentModel.swift in Sources */,
 				ADAB93B1299032E100F8D1FA /* PatientHomeView.swift in Sources */,
-				ADAB93CE2990334000F8D1FA /* patientFormModel.swift in Sources */,
 				AD529071299F3C3800425FD7 /* profileView.swift in Sources */,
 				ADAB93B0299032E100F8D1FA /* patientHome.swift in Sources */,
 				AD428AE529DD72FA00351BC3 /* testU.swift in Sources */,
 				AD90B895299B6523005F932F /* redirectAuth.swift in Sources */,
 				AD11453229D84EDD00627FCE /* patientAuth.swift in Sources */,
 				AD428ADD29DB13F800351BC3 /* mainMessagesView.swift in Sources */,
+				AD349D9729DE8E9000C8B94E /* locationView.swift in Sources */,
 				AD11453429D863AA00627FCE /* SessionManager.swift in Sources */,
 				AD428ADB29DB098700351BC3 /* titleRow.swift in Sources */,
 				ADC0274D29AB9C300092A967 /* documentLocker.swift in Sources */,
@@ -476,10 +472,10 @@
 				ADB5842029DB04B000F47A76 /* doctorAccountSetup.swift in Sources */,
 				ADAB93C22990333400F8D1FA /* appointmentCard.swift in Sources */,
 				AD9E5CF529A23DC500778157 /* catagoryModel.swift in Sources */,
-				ADAB93CA2990334000F8D1FA /* dataManager.swift in Sources */,
+				AD428AE929DDB02400351BC3 /* chatSection.swift in Sources */,
+				ADAB93CA2990334000F8D1FA /* DataManager.swift in Sources */,
 				ADAB93182990321700F8D1FA /* SplashScreenView.swift in Sources */,
 				ADAB939D299032BD00F8D1FA /* forgotPassword.swift in Sources */,
-				AD428AE029DC58DA00351BC3 /* MessageViewModel.swift in Sources */,
 				ADB5841F29DB04B000F47A76 /* patientAccountSetup.swift in Sources */,
 				ADAB93CD2990334000F8D1FA /* Patient.swift in Sources */,
 			);

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import SDWebImageSwiftUI
 
 struct PatientHomeView: View {
     @Binding var selectedTab: Int
@@ -120,21 +121,29 @@ struct PatientHomeView_Previews: PreviewProvider {
 
 struct patientHeader: View {
     @Environment (\.dismiss) private var dismiss
+    @ObservedObject private var viewModel = DataManager()
     @State var logoutAlert = false
     @State var alertMessage = ""
     var body: some View {
         VStack {
             HStack {
-                Circle()
-                    .frame(width: 80, height: 80)
+                WebImage(url: URL(string: viewModel.userData?.profileImage ?? ""))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 70, height: 70)
                     .clipped()
+                    .cornerRadius(70)
+                    .overlay(RoundedRectangle(cornerRadius: 70)
+                        .stroke(Color(.label), lineWidth: 1)
+                    )
+                    .shadow(radius: 5, x: 5, y: 5)
                 VStack(alignment: .leading) {
                     Text("Welcome!")
                         .frame(alignment: .leading)
                         .clipped()
                         .font(.title2)
                         .foregroundColor(Color("lightText"))
-                    Text("Sachin Sharma")
+                    Text("\(viewModel.userData?.name ?? "")")
                         .font(.title)
                         .foregroundColor(Color("darkText"))
                     
@@ -173,6 +182,7 @@ struct patientHeader: View {
 
 struct catagory: View {
     
+    @ObservedObject private var viewModel = DataManager()
     let catagory: [catagoryModel] = [
         .init(id: 0, title: .Diagnostic, image: "mascot", color: "1"),
         .init(id: 1, title: .Shots, image: "mascot", color: "2"),
@@ -234,6 +244,7 @@ struct catagory: View {
 }
 
 struct upcomingAppointments: View {
+    @ObservedObject private var viewModel = DataManager()
     
     var body: some View {
         VStack {
@@ -260,6 +271,7 @@ struct upcomingAppointments: View {
 }
 
 struct nearbyDoctors: View {
+    @ObservedObject private var viewModel = DataManager()
     var body: some View {
         VStack {
             HStack {
@@ -377,7 +389,11 @@ struct nearbyDoctors: View {
     }
 }
 
+
+
 struct medication: View {
+    
+    @ObservedObject private var viewModel = DataManager()
     
     let catagory: [catagoryModel] = [
         .init(id: 0, title: .Diagnostic, image: "mascot", color: "1"),

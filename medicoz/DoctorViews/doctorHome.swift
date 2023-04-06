@@ -25,7 +25,7 @@ struct doctorHome: View {
 //                        Text("Home")
 //                    }
 //                    .tag(0)
-                doctorAppointmentView()
+                mainMessagesView()
                     .tabItem {
                         Image(systemName: "calendar.badge.clock")
                         Text("Appointments")

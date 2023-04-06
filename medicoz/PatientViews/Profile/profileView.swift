@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
+import SDWebImageSwiftUI
 
 struct profileView: View {
     
@@ -17,30 +18,18 @@ struct profileView: View {
     @State var logoutAlert = false
     @AppStorage ("uid") var userID: String = ""
     @AppStorage ("userRole") var userRole: String = ""
+    @ObservedObject private var viewModel = DataManager()
 
 
     
     var body: some View {
         NavigationView {
             ZStack{
-                if sessionManager.isLoading {
-                    Color.clear
-                        .background(
-                            Color.white
-                                .opacity(0.2)
-                                .blur(radius: 10)
-                        )
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .scaleEffect(3)
-                }
                 VStack {
                     
                     VStack {
                         Text("Profile Details")
                             .font(.title)
-                        
-                        
                     }.padding(.horizontal).padding(.top, 10)
                     
                     
@@ -53,13 +42,22 @@ struct profileView: View {
                                     .frame(width: 360, height: 140)
                                     .overlay(
                                         HStack{
-                                            Circle()
-                                                .fill(Color.white)
+                                            
+                                            WebImage(url: URL(string: viewModel.userData?.profileImage ?? ""))
+                                                .resizable()
+                                                .scaledToFill()
                                                 .frame(width: 80, height: 80)
+                                                .clipped()
+                                                .cornerRadius(80)
+                                                .overlay(RoundedRectangle(cornerRadius: 80)
+                                                    .stroke(Color(.label), lineWidth: 1)
+                                                )
                                                 .shadow(radius: 5, x: 5, y: 5)
                                             
+                                                
+                                            
                                             VStack(alignment: .leading){
-                                                Text("Sachin Sharma")
+                                                Text("\(viewModel.userData?.name ?? "")")
                                                     .font(.title2)
                                                     .foregroundColor(.black)
                                                     .font(Font.custom("Poppins-Regular", size: 10))
@@ -128,14 +126,14 @@ struct profileView: View {
                                         Text("Date of birth")
                                             .foregroundColor(Color("lightText"))
                                         Spacer()
-                                        Text("July 28, 2001")
+                                        Text("\(viewModel.userData?.birthday ?? "")")
                                             .foregroundColor(Color("darkText"))
                                     }.padding(.vertical,5)
                                     HStack{
                                         Text("City")
                                             .foregroundColor(Color("lightText"))
                                         Spacer()
-                                        Text("Shimla")
+                                        Text("shimla")
                                             .foregroundColor(Color("darkText"))
                                     }.padding(.vertical,5)
                                     HStack{
@@ -149,14 +147,14 @@ struct profileView: View {
                                         Text("Blood Group")
                                             .foregroundColor(Color("lightText"))
                                         Spacer()
-                                        Text("B+")
+                                        Text("\(viewModel.userData?.bloodGroup ?? "")")
                                             .foregroundColor(Color("darkText"))
                                     }.padding(.vertical,5)
                                     HStack{
                                         Text("Weight")
                                             .foregroundColor(Color("lightText"))
                                         Spacer()
-                                        Text("65")
+                                        Text("\(viewModel.userData?.weight ?? "")")
                                             .foregroundColor(Color("darkText"))
                                     }.padding(.vertical,5)
                                     

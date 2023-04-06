@@ -50,14 +50,6 @@ struct patientHome: View {
             }.edgesIgnoringSafeArea(.all)
                 .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
-//            .fullScreenCover(isPresented: $sessionManager.patientDocumentNotFound, onDismiss: nil) {
-//                patientAccountSetup()
-//            }
-            .onAppear {
-                if Auth.auth().currentUser != nil {
-                    sessionManager.patientApiCall()
-                }
-            }
         }
     }
 }

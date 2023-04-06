@@ -355,7 +355,7 @@ struct patientAccountSetup: View {
                             "role": userRole,
                             "uid": numericId,
                             "name": name,
-                            "imageURL": downloadURL.absoluteString,
+                            "profileImage": downloadURL.absoluteString,
                             "birthday": birthday,
                             "gender": gender,
                             "weight": weight,
