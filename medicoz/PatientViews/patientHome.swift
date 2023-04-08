@@ -30,7 +30,7 @@ struct patientHome: View {
                         Image(systemName: "message.fill")
                         Text("Messages")
                     }.tag(2)
-                appointmentView()
+                testU()
                     .tabItem {
                         Image(systemName: "plus.circle")
                         Text("Appointments")

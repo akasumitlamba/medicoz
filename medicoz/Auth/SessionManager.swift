@@ -17,6 +17,7 @@ enum UserRole: String {
     case role2 = "doctor"
 }
 
+
 class SessionManager: ObservableObject {
     
     @Published var isLoggedIn = false
@@ -50,6 +51,7 @@ class SessionManager: ObservableObject {
     @Published var doctorDocumentNotFound = false
     
     
+    
     func registerUser(email: String, password: String, role: String, completion: @escaping (Result<Void, Error>) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) {
             result, error in
@@ -72,12 +74,6 @@ class SessionManager: ObservableObject {
                 
                 
                     self.userID = user.uid
-                    if role == "patient" {
-                        self.patientApiCall()
-                        
-                    } else {
-                        self.doctorApiCall()
-                    }
                 
                 
                 Firestore.firestore().collection("users").document(user.uid).setData(userData) { error in
@@ -95,11 +91,6 @@ class SessionManager: ObservableObject {
                         print("Successfully Registered: \(result?.user.uid ?? "")")
                         //TODO: load next screen
                         self.isLoggedIn = true
-                        if role == "patient" {
-                            self.patientApiCall()
-                        } else {
-                            self.doctorApiCall()
-                        }
                         self.isLoading = false
                     }
                 }
@@ -205,6 +196,7 @@ class SessionManager: ObservableObject {
     }
     
     func fetchUserRole(completion: @escaping (Result<Void, Error>) -> Void) {
+        
         guard let currentUser = Firebase.Auth.auth().currentUser else { return }
         let userDocRef = Firestore.firestore().collection("users").document(currentUser.uid)
         userDocRef.getDocument { [weak self] document, error in

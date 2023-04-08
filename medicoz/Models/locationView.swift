@@ -17,8 +17,8 @@ struct locationView: View {
     
     var body: some View {
         VStack {
-//            MapView(nearbyUsers: $nearbyUsers, centerCoordinate: locationManager.location?.coordinate ?? CLLocationCoordinate2D())
-//                .edgesIgnoringSafeArea(.all)
+            MapView(nearbyUsers: $nearbyUsers, centerCoordinate: locationManager.location?.coordinate ?? CLLocationCoordinate2D())
+                .edgesIgnoringSafeArea(.all)
             
             List(nearbyUsers) { userr in
                 Text(userr.name)

@@ -12,79 +12,116 @@ import FirebaseStorage
 import FirebaseFirestore
 import SDWebImageSwiftUI
 
+struct ChatUser: Identifiable {
+    var id = UUID().uuidString
+    let email, name, profileImage: String
+}
 
+class MainMessagesViewModel: ObservableObject {
+    
+    @Published var errorMessage = ""
+    @Published var chatUser: ChatUser?
+    
+    
+    init() {
+        fetchCurrentUser()
+    }
+    
+    private func fetchCurrentUser() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            self.errorMessage = "Could not find firebase uid"
+            return
+        }
+        
+        Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
+            if let error = error {
+                self.errorMessage = "Failed to fetch current user: \(error)"
+                print("Failed to fetch current user:", error)
+                return
+            }
+            
+            guard let data = snapshot?.data() else {
+                self.errorMessage = "No data found"
+                return
+                
+            }
+
+            
+            let email = data["email"] as? String ?? ""
+            let name = data["name"] as? String ?? ""
+            
+            let profileImage = data["profileImage"] as? String ?? ""
+            
+            self.chatUser = ChatUser(email: email, name: name, profileImage: profileImage)
+        }
+    }
+}
+
+struct userr: Identifiable {
+    let id: String
+    let uid: String
+    let email: String
+    let name: String
+    let profileImage: String
+}
 
 struct mainMessagesView: View {
+    @State private var searchText = ""
+    @State private var users = [userr]()
     
-    @State var shouldShowLogOutOptions = false
-    
-    @ObservedObject private var viewModel = DataManager()
-    
-    private var customNavBar: some View {
-        HStack(spacing: 16) {
-            
-            WebImage(url: URL(string: viewModel.userData?.profileImage ?? ""))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 50, height: 50)
-                            .clipped()
-                            .cornerRadius(50)
-                            .overlay(RoundedRectangle(cornerRadius: 44)
-                                        .stroke(Color(.label), lineWidth: 1)
-                            )
-                            .shadow(radius: 5)
-
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text("\(viewModel.userData?.name ?? "")")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.white)
-                
-                HStack {
-                    Circle()
-                        .foregroundColor(.green)
-                        .frame(width: 14, height: 14)
-                    Text("online")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(.lightGray))
-                }
-            }
-            
-            Spacer()
-            Button {
-                shouldShowLogOutOptions.toggle()
-            } label: {
-                Image(systemName: "gear")
-                    .font(.system(size: 24, weight: .bold))
-                    //.foregroundColor(Color(.label))
-                    .foregroundColor(.white)
-            }
-        }
-        .padding()
-        .background(Color("AccentColor"))
-        .actionSheet(isPresented: $shouldShowLogOutOptions) {
-            .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
-                .destructive(Text("Sign Out"), action: {
-                    print("handle sign out")
-                }),
-                    .cancel()
-            ])
+    var filteredItems: [userr] {
+        if searchText.isEmpty {
+            return users
+        } else {
+            return users.filter { $0.email.localizedCaseInsensitiveContains(searchText) }
         }
     }
     
     var body: some View {
         NavigationView {
-            
             VStack {
-                customNavBar
-                ScrollView {
-                    messagesView
+                if !searchText.isEmpty {
+                    List(filteredItems) { item in
+                        HStack {
+                            Image(item.profileImage)
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                            Text(item.email.replacingOccurrences(of: "@gmail.com", with: ""))
+                        }
+                        
+                    }
+                } else {
+                    ScrollView {
+                        messagesView
+                    }
+                }
+                
+            }.navigationTitle("Chats")
+                .searchable(text: $searchText)
+        }.onAppear {
+            fetchFirebaseData()
+        }
+    }
+    
+    func fetchFirebaseData() {
+        let db = Firestore.firestore()
+        db.collection("users")
+            .getDocuments { snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                users = documents.map { document in
+                    let data = document.data()
+                    let id = document.documentID
+                    let uid = data["uid"] as? String ?? ""
+                    let email = data["email"] as? String ?? ""
+                    let name = data["name"] as? String ?? ""
+                    let profileImage = data["profileImage"] as? String ?? ""
+                    return userr(id: id, uid: uid, email: email, name: name, profileImage: profileImage)
                 }
             }
-            .overlay(
-                newMessageButton, alignment: .bottomTrailing)
-            .navigationBarHidden(true)
-        }
     }
     
     private var messagesView: some View {
@@ -96,7 +133,7 @@ struct mainMessagesView: View {
                             .font(.system(size: 32))
                             .padding(8)
                             .overlay(RoundedRectangle(cornerRadius: 44)
-                                        .stroke(Color(.label), lineWidth: 1)
+                                .stroke(Color(.label), lineWidth: 1)
                             )
                         
                         
@@ -121,9 +158,11 @@ struct mainMessagesView: View {
         }
     }
     
+    @State var showNewMessageScreen = false
+    
     private var newMessageButton: some View {
         Button {
-            
+            showNewMessageScreen.toggle()
         } label: {
             HStack {
                 Image(systemName: "plus")
@@ -134,6 +173,9 @@ struct mainMessagesView: View {
                     .background(Color("darkAcc"))
                     .clipShape(Circle())
             }.padding(.bottom)
+        }
+        .fullScreenCover(isPresented: $showNewMessageScreen) {
+            newMessageView()
         }
     }
 }

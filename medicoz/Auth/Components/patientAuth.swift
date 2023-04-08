@@ -155,7 +155,7 @@ struct patientAuth: View {
                         VStack {
                             VStack {
                                 Button {
-                                    
+                                    userRole = "patient"
                                     sessionManager.isLoading = true
                                     if isLoginMode {
                                         sessionManager.authenticateUser(email: email, password: password) { result in

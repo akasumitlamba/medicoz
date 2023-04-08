@@ -303,6 +303,8 @@ struct doctorAccountSetup: View {
     private func uploadData() {
         
         guard let uid = Auth.auth().currentUser?.uid else{return}
+        let randomNumber = abs(UUID().hashValue) % 1000000000
+        let numericId = String(format: "%010d", randomNumber)
         
         guard let image = image else {
             print("Image not found")
@@ -335,7 +337,10 @@ struct doctorAccountSetup: View {
                 }
                 
     
-                let data = ["name": name,
+                let data = ["email": email,
+                            "role": userRole,
+                            "uid": numericId,
+                            "name": name,
                             "profileImage": downloadURL.absoluteString,
                             "birthday": birthday,
                             "gender": gender,

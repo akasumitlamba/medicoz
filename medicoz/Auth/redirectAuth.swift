@@ -13,8 +13,7 @@ struct redirectAuth: View {
     @AppStorage ("userRole") var userRole: String = ""
     @StateObject var sessionManager = SessionManager()
     @AppStorage ("uid") var userID: String = ""
-
-    //@Environment (\.dismiss) private var dismiss
+    @ObservedObject private var viewModel = DataManager()
     
     var body: some View {
         NavigationView {
@@ -40,7 +39,8 @@ struct redirectAuth: View {
                                 .font(.title3)
                         }
                     }
-                } else {
+                }
+                else {
                     if userRole == "patient" {
                         patientHome()
                     } else {
