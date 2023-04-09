@@ -12,7 +12,6 @@
 		AD11453429D863AA00627FCE /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453329D863AA00627FCE /* SessionManager.swift */; };
 		AD11453729D8662800627FCE /* doctorHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453629D8662800627FCE /* doctorHome.swift */; };
 		AD349D9729DE8E9000C8B94E /* locationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD349D9629DE8E9000C8B94E /* locationView.swift */; };
-		AD349D9929DEEC4900C8B94E /* newMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD349D9829DEEC4900C8B94E /* newMessageView.swift */; };
 		AD428ADD29DB13F800351BC3 /* mainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */; };
 		AD428AE329DD68FF00351BC3 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AD428AE229DD68FF00351BC3 /* SDWebImageSwiftUI */; };
 		AD428AE529DD72FA00351BC3 /* testU.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428AE429DD72FA00351BC3 /* testU.swift */; };
@@ -50,6 +49,7 @@
 		ADAB93C22990333400F8D1FA /* appointmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93BD2990333300F8D1FA /* appointmentCard.swift */; };
 		ADAB93CA2990334000F8D1FA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C52990334000F8D1FA /* DataManager.swift */; };
 		ADAB93CD2990334000F8D1FA /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB93C82990334000F8D1FA /* Patient.swift */; };
+		ADAC893A29E2C5A400B1ED8D /* chatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAC893929E2C5A400B1ED8D /* chatLogView.swift */; };
 		ADB5840B29D9668A00F47A76 /* doctorHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5840A29D9668A00F47A76 /* doctorHomeView.swift */; };
 		ADB5840F29D96E8D00F47A76 /* interactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5840E29D96E8D00F47A76 /* interactionHistory.swift */; };
 		ADB5841129D96E9E00F47A76 /* doctorProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5841029D96E9E00F47A76 /* doctorProfile.swift */; };
@@ -65,7 +65,6 @@
 		AD11453329D863AA00627FCE /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		AD11453629D8662800627FCE /* doctorHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorHome.swift; sourceTree = "<group>"; };
 		AD349D9629DE8E9000C8B94E /* locationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationView.swift; sourceTree = "<group>"; };
-		AD349D9829DEEC4900C8B94E /* newMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newMessageView.swift; sourceTree = "<group>"; };
 		AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainMessagesView.swift; sourceTree = "<group>"; };
 		AD428AE429DD72FA00351BC3 /* testU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testU.swift; sourceTree = "<group>"; };
 		AD428AE829DDB02400351BC3 /* chatSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatSection.swift; sourceTree = "<group>"; };
@@ -100,6 +99,7 @@
 		ADAB93BD2990333300F8D1FA /* appointmentCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = appointmentCard.swift; sourceTree = "<group>"; };
 		ADAB93C52990334000F8D1FA /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		ADAB93C82990334000F8D1FA /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
+		ADAC893929E2C5A400B1ED8D /* chatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatLogView.swift; sourceTree = "<group>"; };
 		ADB5840A29D9668A00F47A76 /* doctorHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorHomeView.swift; sourceTree = "<group>"; };
 		ADB5840E29D96E8D00F47A76 /* interactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interactionHistory.swift; sourceTree = "<group>"; };
 		ADB5841029D96E9E00F47A76 /* doctorProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorProfile.swift; sourceTree = "<group>"; };
@@ -128,6 +128,7 @@
 		AD11453529D8660400627FCE /* Chat Section */ = {
 			isa = PBXGroup;
 			children = (
+				AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */,
 				AD428AD929DB096900351BC3 /* Components */,
 			);
 			path = "Chat Section";
@@ -136,8 +137,7 @@
 		AD428AD929DB096900351BC3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */,
-				AD349D9829DEEC4900C8B94E /* newMessageView.swift */,
+				ADAC893929E2C5A400B1ED8D /* chatLogView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -449,6 +449,7 @@
 				AD529078299FD70500425FD7 /* editProfile.swift in Sources */,
 				ADAB93B7299032E100F8D1FA /* appointmentView.swift in Sources */,
 				ADAB92F62990314400F8D1FA /* ContentView.swift in Sources */,
+				ADAC893A29E2C5A400B1ED8D /* chatLogView.swift in Sources */,
 				ADB5841B29D9C68500F47A76 /* sessionAuth.swift in Sources */,
 				AD11453029D84ED200627FCE /* doctorAuth.swift in Sources */,
 				ADB5840F29D96E8D00F47A76 /* interactionHistory.swift in Sources */,
@@ -464,7 +465,6 @@
 				AD11453429D863AA00627FCE /* SessionManager.swift in Sources */,
 				ADC0274D29AB9C300092A967 /* documentLocker.swift in Sources */,
 				ADAB92F42990314400F8D1FA /* medicozApp.swift in Sources */,
-				AD349D9929DEEC4900C8B94E /* newMessageView.swift in Sources */,
 				AD11453729D8662800627FCE /* doctorHome.swift in Sources */,
 				ADB5841129D96E9E00F47A76 /* doctorProfile.swift in Sources */,
 				AD529087299FFD1800425FD7 /* catogeryDetails.swift in Sources */,

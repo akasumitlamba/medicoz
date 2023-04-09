@@ -25,7 +25,10 @@ struct patientHome: View {
                         Text("Home")
                     }
                     .tag(0)
-                mainMessagesView()
+                mainMessagesView(didSelectNewUser: { item
+                    in
+                    print(item.email)
+                })
                     .tabItem {
                         Image(systemName: "message.fill")
                         Text("Messages")

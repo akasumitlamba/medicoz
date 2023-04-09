@@ -25,7 +25,10 @@ struct doctorHome: View {
 //                        Text("Home")
 //                    }
 //                    .tag(0)
-                mainMessagesView()
+                mainMessagesView(didSelectNewUser: { item
+                    in
+                    print(item.email)
+                })
                     .tabItem {
                         Image(systemName: "calendar.badge.clock")
                         Text("Appointments")

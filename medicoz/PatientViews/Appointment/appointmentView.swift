@@ -32,7 +32,10 @@ struct appointmentView: View {
             }
             
             Spacer()
-            NavigationLink(destination: mainMessagesView()) {
+            NavigationLink(destination: mainMessagesView(didSelectNewUser: { item
+                in
+                print(item.email)
+            })) {
                 Image(systemName: "message.fill")
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.white)
