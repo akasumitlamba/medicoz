@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseFirestore
 import SDWebImageSwiftUI
 
-struct ChatUser: Identifiable {
+struct findUser: Identifiable {
     var id = UUID().uuidString
     let email, name, profileImage: String
 }
@@ -20,7 +20,7 @@ struct ChatUser: Identifiable {
 class MainMessagesViewModel: ObservableObject {
     
     @Published var errorMessage = ""
-    @Published var chatUser: ChatUser?
+    @Published var chatUser: findUser?
     
     
     init() {
@@ -53,12 +53,12 @@ class MainMessagesViewModel: ObservableObject {
             
             let profileImage = data["profileImage"] as? String ?? ""
             
-            self.chatUser = ChatUser(email: email, name: name, profileImage: profileImage)
+            self.chatUser = findUser(email: email, name: name, profileImage: profileImage)
         }
     }
 }
 
-struct userr: Identifiable {
+struct ChatUser: Identifiable {
     let id: String
     let uid: String
     let email: String
@@ -68,14 +68,14 @@ struct userr: Identifiable {
 
 struct mainMessagesView: View {
     @State private var searchText = ""
-    @State private var users = [userr]()
-    let didSelectNewUser: (userr) -> ()
-    @State var chatUser: userr?
+    @State private var users = [ChatUser]()
+    let didSelectNewUser: (ChatUser) -> ()
+    @State var chatUser: ChatUser?
     @State var shouldNavigateToChatLogView = false
     @Environment(\.presentationMode) var presentationMode
     
     //filter users from firebase
-    var filteredItems: [userr] {
+    var filteredItems: [ChatUser] {
         if searchText.isEmpty {
             return users
         } else {
@@ -155,7 +155,7 @@ struct mainMessagesView: View {
                     let email = data["email"] as? String ?? ""
                     let name = data["name"] as? String ?? ""
                     let profileImage = data["profileImage"] as? String ?? ""
-                    return userr(id: id, uid: uid, email: email, name: name, profileImage: profileImage)
+                    return ChatUser(id: id, uid: uid, email: email, name: name, profileImage: profileImage)
                 }
             }
     }

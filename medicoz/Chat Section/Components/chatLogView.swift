@@ -6,31 +6,78 @@
 //
 
 import SwiftUI
+import Firebase
 
 class ChatLogViewModel: ObservableObject {
-    init() {
-        
+    
+    @Published var message = ""
+    @Published var errorMessage = ""
+    let chatUser: ChatUser?
+    
+    init(chatUser: ChatUser?) {
+        self.chatUser = chatUser
     }
     
-    func handleSend(text: String) {
+    func handleSend() {
+        print(message)
+        guard let fromId = Firebase.Auth.auth().currentUser?.uid else {return}
         
+        guard let toId = chatUser?.uid else { return }
+        
+        let senderDocument = Firestore.firestore()
+            .collection("messages")
+            .document(fromId)
+            .collection(toId)
+            .document()
+        
+        let messageData = ["fromId": fromId, "toId": toId, "message": self.message, "timestamp": Timestamp()] as [String : Any]
+        
+        senderDocument.setData(messageData) { error in
+            if let error = error {
+                self.errorMessage = "Failed to save message into firestore: \(error)"
+                print("Failed to save message into firestore: \(error)")
+                return
+            }
+            self.message = ""
+            print ("Successfully saved current user sending message")
+        }
+        
+        let receiverDocument = Firestore.firestore()
+            .collection("messages")
+            .document(toId)
+            .collection(fromId)
+            .document()
+        
+        receiverDocument.setData(messageData) { error in
+            if let error = error {
+                self.errorMessage = "Failed to save message into firestore: \(error)"
+                print("Failed to save message into firestore: \(error)")
+                return
+            }
+            print ("SReceiver Received Message")
+        }
+
     }
 }
 
 struct chatLogView: View {
     
-    let chatUser: userr?
-    @State var message = ""
+    let chatUser: ChatUser?
     
-    @ObservedObject var viewModel = ChatLogViewModel()
+    init(chatUser: ChatUser?) {
+        self.chatUser = chatUser
+        self.viewModel = .init(chatUser: chatUser)
+    }
+    
+    @ObservedObject var viewModel: ChatLogViewModel
     
     var body: some View {
-        NavigationView {
+        ZStack{
             messagesView
-                //.navigationTitle("\(chatUser?.name ?? "")")
-                .navigationTitle("Sachin Sharma")
-                .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationTitle("\(chatUser?.name ?? "")")
+        //.navigationTitle("Sachin Sharma")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var messagesView: some View {
@@ -67,13 +114,13 @@ struct chatLogView: View {
                 .foregroundColor(Color.gray)
             ZStack {
                 DescriptionPlaceholder()
-                TextEditor(text: $message)
-                    .opacity(message.isEmpty ? 0.5 : 1)
+                TextEditor(text: $viewModel.message)
+                    .opacity(viewModel.message.isEmpty ? 0.5 : 1)
             }
             .frame(height: 40)
             Button {
                 // handle message
-                viewModel.handleSend(text: self.message)
+                viewModel.handleSend()
             } label: {
                 Text("Send")
             }.buttonStyle(.borderedProminent)
