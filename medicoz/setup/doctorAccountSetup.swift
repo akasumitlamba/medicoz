@@ -66,8 +66,6 @@ struct doctorAccountSetup: View {
                             ProgressView()
                                 .progressViewStyle(.circular)
                                 .scaleEffect(3).padding(20)
-                            Text("Wait and take a Sip of Tea")
-                                .font(.title3)
                         }
                     }
                 }

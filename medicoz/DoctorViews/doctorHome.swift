@@ -30,8 +30,8 @@ struct doctorHome: View {
                     print(item.email)
                 })
                     .tabItem {
-                        Image(systemName: "calendar.badge.clock")
-                        Text("Appointments")
+                        Image(systemName: "message.fill")
+                        Text("Messages")
                     }.tag(2)
                 appointmentView()
                     .tabItem {

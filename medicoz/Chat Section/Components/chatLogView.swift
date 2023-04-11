@@ -8,21 +8,70 @@
 import SwiftUI
 import Firebase
 
+
+struct FirebaseConstants {
+    static let fromId = "fromId"
+    static let toId = "toId"
+    static let message = "message"
+}
+
+struct ChatMessage: Identifiable {
+    
+    var id: String { documentId }
+    
+    let documentId: String
+    let fromId, toId, message: String
+    
+    init(documentId: String, data: [String: Any]) {
+        self.documentId = documentId
+        self.fromId = data[FirebaseConstants.fromId] as? String ?? ""
+        self.toId = data[FirebaseConstants.toId] as? String ?? ""
+        self.message = data[FirebaseConstants.message] as? String ?? ""
+    }
+}
+
 class ChatLogViewModel: ObservableObject {
     
     @Published var message = ""
     @Published var errorMessage = ""
     let chatUser: ChatUser?
+    @Published var chatMessages = [ChatMessage]()
     
     init(chatUser: ChatUser?) {
         self.chatUser = chatUser
+        
+        fetchMessages()
+    }
+    
+    private func fetchMessages() {
+        guard let fromId = Firebase.Auth.auth().currentUser?.uid else { return }
+        guard let toId = chatUser?.id else { return }
+        Firestore.firestore()
+            .collection("messages")
+            .document(fromId)
+            .collection(toId)
+            .order(by: "timestamp")
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    self.errorMessage = "Failed to listen for messages: \(error)"
+                    print(error)
+                    return
+                }
+                
+                querySnapshot?.documentChanges.forEach({ change in
+                    if change.type == .added {
+                        let data = change.document.data()
+                        self.chatMessages.append(.init(documentId: change.document.documentID, data: data))
+                    }
+                })
+            }
     }
     
     func handleSend() {
         print(message)
         guard let fromId = Firebase.Auth.auth().currentUser?.uid else {return}
         
-        guard let toId = chatUser?.uid else { return }
+        guard let toId = chatUser?.id else { return }
         
         let senderDocument = Firestore.firestore()
             .collection("messages")
@@ -30,7 +79,7 @@ class ChatLogViewModel: ObservableObject {
             .collection(toId)
             .document()
         
-        let messageData = ["fromId": fromId, "toId": toId, "message": self.message, "timestamp": Timestamp()] as [String : Any]
+        let messageData = [FirebaseConstants.fromId: fromId, FirebaseConstants.toId: toId, FirebaseConstants.message: self.message, "timestamp": Timestamp()] as [String : Any]
         
         senderDocument.setData(messageData) { error in
             if let error = error {
@@ -83,15 +132,30 @@ struct chatLogView: View {
     private var messagesView: some View {
         VStack {
             ScrollView {
-                ForEach(0..<10) { num in
-                    HStack {
-                        Spacer()
-                        HStack {
-                            Text("Dummy Message")
-                        }.padding()
-                            .background(Color("AccentColor"))
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                ForEach(viewModel.chatMessages) { text in
+                    VStack{
+                        if text.fromId == Firebase.Auth.auth().currentUser?.uid {
+                            HStack {
+                                Spacer()
+                                HStack {
+                                    Text(text.message)
+                                }.padding()
+                                    .background(Color("AccentColor"))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                            }
+                        } else {
+                            HStack {
+                                HStack {
+                                    Text(text.message)
+                                }.padding()
+                                    .background(.white)
+                                    .foregroundColor(.black)
+                                    .cornerRadius(10)
+                                
+                                Spacer()
+                            }
+                        }
                     }
                     .padding(.horizontal)
                     .padding(.top, 8)
