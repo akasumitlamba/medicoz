@@ -26,11 +26,7 @@ struct profileView: View {
         NavigationView {
             ZStack{
                 VStack {
-                    
-                    VStack {
-                        Text("Profile Details")
-                            .font(.title)
-                    }.padding(.horizontal).padding(.top, 10)
+
                     
                     
                     ScrollView(.vertical, showsIndicators: false) {
@@ -240,6 +236,8 @@ struct profileView: View {
                     })
                 }
             }
+            .navigationTitle("Profile Details")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

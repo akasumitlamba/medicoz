@@ -14,13 +14,21 @@ import SDWebImageSwiftUI
 
 
 struct UserData {
-    let uid, email, role, name, birthday, bloodGroup, weight, profileImage: String
+    let uid, email, role, name, birthday, gender, bloodGroup, weight, profileImage: String
+}
+struct PatientData {
+    let uid, email, role, name, birthday, gender, bloodGroup, weight, profileImage: String
+}
+struct DoctorData {
+    let uid, email, role, name, birthday, gender, regNo, spec, profileImage: String
 }
 
 class DataManager: ObservableObject {
     
     @Published var errorMessage = ""
     @Published var userData: UserData?
+    @Published var patientData: PatientData?
+    @Published var doctorData: DoctorData?
     
     
     init() {
@@ -52,11 +60,18 @@ class DataManager: ObservableObject {
             let email = data["email"] as? String ?? ""
             let name = data["name"] as? String ?? ""
             let birthday = data["birthday"] as? String ?? ""
+            let gender = data["gender"] as? String ?? ""
             let bloodGroup = data["bloodGroup"] as? String ?? ""
             let weight = data["weight"] as? String ?? ""
             let profileImage = data["profileImage"] as? String ?? ""
+            let regNo = data["regNo"] as? String ?? ""
+            let spec = data["spec"] as? String ?? ""
             
-            self.userData = UserData(uid: uid, email: email, role: role, name: name, birthday: birthday, bloodGroup: bloodGroup, weight: weight, profileImage: profileImage)
+            self.userData = UserData(uid: uid, email: email, role: role, name: name, birthday: birthday, gender: gender, bloodGroup: bloodGroup, weight: weight, profileImage: profileImage)
+            
+            self.patientData = PatientData(uid: uid, email: email, role: role, name: name, birthday: birthday, gender: gender, bloodGroup: bloodGroup, weight: weight, profileImage: profileImage)
+
+            self.doctorData = DoctorData(uid: uid, email: email, role: role, name: name, birthday: birthday, gender: gender, regNo: regNo, spec: spec, profileImage: profileImage)
         }
     }
 }

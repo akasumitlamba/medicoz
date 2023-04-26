@@ -25,9 +25,7 @@ struct doctorAccountSetup: View {
     @State var birthday: Date = Date()
     @State var gender = ""
     @State var regNo: String = ""
-    @State var bg: String = "choose"
-    
-    let bgTypes = ["choose","A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"]
+    @State var spec = ""
     
     @State var loginStatusMessage = ""
     @State var imageUrl = ""
@@ -54,8 +52,6 @@ struct doctorAccountSetup: View {
                 
                 if sessionManager.isLoading {
                     ZStack {
-                            
-                            
                             Color.clear
                                 .background(
                                     Color.white
@@ -190,7 +186,7 @@ struct doctorAccountSetup: View {
                                 }
                             }.frame(width: 340).padding(.vertical, 5)
                             
-                            //Weight
+                            //Registration No
                             HStack{
                                 Text("Registration No")
                                     .font(.custom("Poppins-Regular", size: 20))
@@ -206,27 +202,23 @@ struct doctorAccountSetup: View {
                                 
                             }.frame(width: 340, height: 55).padding(.vertical, 13)
                             
-                            //Blood Group
+                            //specialization
                             HStack{
-                                Text("Blood Group")
+                                Text("Specialization")
                                     .font(.custom("Poppins-Regular", size: 20))
                                     .padding(.horizontal, 3)
-                        
-                                    HStack{
-                                        Picker("Choose", selection: $bg) {
-                                            ForEach(bgTypes, id: \.self) { type in
-                                                Text(type)
-                                                    .tag(type)
-                                            }
-                                        }.padding()
-                                        Spacer()
-                                    }.frame(width: 210, height: 55)
-                                    .background(Color.black.opacity(0.05))
-                                    .cornerRadius(10)
-                                    .padding(.vertical, 8)
                                 
+                                TextField("specialization", text: $spec)
+                                    .keyboardType(.numberPad)
+                                    .padding()
+                                    .background(Color.black.opacity(0.05))
+                                    .frame(height: 55)
+                                    .frame(maxWidth: .infinity)
+                                    .cornerRadius(10)
                                 
                             }.frame(width: 340, height: 55).padding(.vertical, 13)
+                            
+                        
                             
                         }.padding(.top, 40)
                         
@@ -256,7 +248,7 @@ struct doctorAccountSetup: View {
                                     .frame(width: 340, height: 55)
                                     .background(Color("AccentColor"))
                                     .cornerRadius(10)
-                            }.disabled(name.isEmpty && regNo.isEmpty && gender.isEmpty && bg.isEmpty)
+                            }.disabled(name.isEmpty && regNo.isEmpty && gender.isEmpty && spec.isEmpty)
                         }.padding(.vertical, 30)
                     }
                     .alert(isPresented: $showAlert) {
@@ -343,7 +335,7 @@ struct doctorAccountSetup: View {
                             "birthday": birthday,
                             "gender": gender,
                             "regNo": regNo,
-                            "bloodGroup": bg] as [String : Any]
+                            "spec": spec] as [String : Any]
                 
                 Firestore.firestore().collection("users").document(uid).setData(data) { error in
                     if let error = error {

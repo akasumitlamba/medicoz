@@ -9,11 +9,7 @@ import SwiftUI
 import Firebase
 
 
-struct FirebaseConstants {
-    static let fromId = "fromId"
-    static let toId = "toId"
-    static let message = "message"
-}
+
 
 struct ChatMessage: Identifiable {
     
@@ -64,6 +60,9 @@ class ChatLogViewModel: ObservableObject {
                         self.chatMessages.append(.init(documentId: change.document.documentID, data: data))
                     }
                 })
+                DispatchQueue.main.async {
+                    self.count += 1
+                }
             }
     }
     
@@ -87,8 +86,13 @@ class ChatLogViewModel: ObservableObject {
                 print("Failed to save message into firestore: \(error)")
                 return
             }
-            self.message = ""
+            
             print ("Successfully saved current user sending message")
+            
+            self.persistRecentMessage()
+            
+            self.message = ""
+            self.count += 1
         }
         
         let receiverDocument = Firestore.firestore()
@@ -103,10 +107,45 @@ class ChatLogViewModel: ObservableObject {
                 print("Failed to save message into firestore: \(error)")
                 return
             }
-            print ("SReceiver Received Message")
+            print ("Receiver Received Message")
         }
 
     }
+    
+    private func persistRecentMessage() {
+        
+        guard let chatUser = chatUser else { return }
+        
+        guard let uid = Firebase.Auth.auth().currentUser?.uid else {return}
+        guard let toId = self.chatUser?.id else { return }
+        
+        let document = Firestore.firestore()
+            .collection("recent_messages")
+            .document(uid)
+            .collection("messages")
+            .document(toId)
+        
+        let data = [
+            FirebaseConstants.timestamp: Timestamp(),
+            FirebaseConstants.message: self.message,
+            FirebaseConstants.fromId: uid,
+            FirebaseConstants.toId: toId,
+            FirebaseConstants.profileImage: chatUser.profileImage,
+            FirebaseConstants.email: chatUser.email,
+            FirebaseConstants.name: chatUser.name
+            
+        ] as [String : Any]
+        
+        document.setData(data) { error in
+            if let error = error {
+                self.errorMessage = "Failed to save recent message: \(error)"
+                return
+            }
+        }
+        
+    }
+    
+    @Published var count = 0
 }
 
 struct chatLogView: View {
@@ -125,43 +164,29 @@ struct chatLogView: View {
             messagesView
         }
         .navigationTitle("\(chatUser?.name ?? "")")
-        //.navigationTitle("Sachin Sharma")
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+    let emptyScrollToString = "Empty"
     
     private var messagesView: some View {
         VStack {
             ScrollView {
-                ForEach(viewModel.chatMessages) { text in
-                    VStack{
-                        if text.fromId == Firebase.Auth.auth().currentUser?.uid {
-                            HStack {
-                                Spacer()
-                                HStack {
-                                    Text(text.message)
-                                }.padding()
-                                    .background(Color("AccentColor"))
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                            }
-                        } else {
-                            HStack {
-                                HStack {
-                                    Text(text.message)
-                                }.padding()
-                                    .background(.white)
-                                    .foregroundColor(.black)
-                                    .cornerRadius(10)
-                                
-                                Spacer()
-                            }
+                ScrollViewReader { ScrollViewProxy in
+                    VStack {
+                        ForEach(viewModel.chatMessages) { message in
+                            MessageView(message: message)
+                            
+                        }
+                        HStack{Spacer()}
+                            .id(self.emptyScrollToString)
+                    }
+                    .onReceive(viewModel.$count) { _ in
+                        withAnimation(.easeIn(duration: 0.5)) {
+                            ScrollViewProxy.scrollTo(self.emptyScrollToString, anchor: .bottom)
                         }
                     }
-                    .padding(.horizontal)
-                    .padding(.top, 8)
-                    
                 }
-                HStack{Spacer()}
                 
             }.background(Color(.init(white: 0.95, alpha: 1)))
                 .safeAreaInset(edge: .bottom) {
@@ -204,6 +229,39 @@ private struct DescriptionPlaceholder: View {
                 .padding(.top, -4)
             Spacer()
         }
+    }
+}
+
+struct MessageView: View {
+    
+    let message: ChatMessage
+    var body: some View {
+        VStack{
+            if message.fromId == Firebase.Auth.auth().currentUser?.uid {
+                HStack {
+                    Spacer()
+                    HStack {
+                        Text(message.message)
+                    }.padding()
+                        .background(Color("AccentColor"))
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            } else {
+                HStack {
+                    HStack {
+                        Text(message.message)
+                    }.padding()
+                        .background(Color("lightAcc"))
+                        .foregroundColor(.black)
+                        .cornerRadius(10)
+                    
+                    Spacer()
+                }
+            }
+        }
+        .padding(.horizontal)
+        .padding(.top, 8)
     }
 }
 

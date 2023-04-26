@@ -11,6 +11,10 @@
 		AD11453229D84EDD00627FCE /* patientAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453129D84EDD00627FCE /* patientAuth.swift */; };
 		AD11453429D863AA00627FCE /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453329D863AA00627FCE /* SessionManager.swift */; };
 		AD11453729D8662800627FCE /* doctorHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11453629D8662800627FCE /* doctorHome.swift */; };
+		AD12751029F4F5C00089E446 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD12750F29F4F5C00089E446 /* FirebaseFirestoreSwift */; };
+		AD12751229F4F6230089E446 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD12751129F4F6230089E446 /* RecentMessage.swift */; };
+		AD12751429F4FBC10089E446 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD12751329F4FBC10089E446 /* ChatUser.swift */; };
+		AD12751629F4FBF00089E446 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD12751529F4FBF00089E446 /* FirebaseConstants.swift */; };
 		AD349D9729DE8E9000C8B94E /* locationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD349D9629DE8E9000C8B94E /* locationView.swift */; };
 		AD428ADD29DB13F800351BC3 /* mainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */; };
 		AD428AE329DD68FF00351BC3 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AD428AE229DD68FF00351BC3 /* SDWebImageSwiftUI */; };
@@ -23,13 +27,13 @@
 		AD529078299FD70500425FD7 /* editProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD529077299FD70500425FD7 /* editProfile.swift */; };
 		AD529087299FFD1800425FD7 /* catogeryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD529086299FFD1800425FD7 /* catogeryDetails.swift */; };
 		AD90B895299B6523005F932F /* redirectAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90B894299B6523005F932F /* redirectAuth.swift */; };
+		AD98197629F2FB0800058503 /* homeScreenHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD98197529F2FB0800058503 /* homeScreenHeader.swift */; };
 		AD9E5CF529A23DC500778157 /* catagoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E5CF429A23DC500778157 /* catagoryModel.swift */; };
 		ADAB92F42990314400F8D1FA /* medicozApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB92F32990314400F8D1FA /* medicozApp.swift */; };
 		ADAB92F62990314400F8D1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB92F52990314400F8D1FA /* ContentView.swift */; };
 		ADAB92F82990314500F8D1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADAB92F72990314500F8D1FA /* Assets.xcassets */; };
 		ADAB92FB2990314500F8D1FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADAB92FA2990314500F8D1FA /* Preview Assets.xcassets */; };
 		ADAB9303299031C500F8D1FA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ADAB9302299031C500F8D1FA /* FirebaseAuth */; };
-		ADAB9305299031C500F8D1FA /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = ADAB9304299031C500F8D1FA /* FirebaseDatabase */; };
 		ADAB9307299031C500F8D1FA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = ADAB9306299031C500F8D1FA /* FirebaseFirestore */; };
 		ADAB9309299031C500F8D1FA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = ADAB9308299031C500F8D1FA /* FirebaseStorage */; };
 		ADAB93162990321700F8D1FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADAB93112990321500F8D1FA /* GoogleService-Info.plist */; };
@@ -64,6 +68,9 @@
 		AD11453129D84EDD00627FCE /* patientAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientAuth.swift; sourceTree = "<group>"; };
 		AD11453329D863AA00627FCE /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		AD11453629D8662800627FCE /* doctorHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorHome.swift; sourceTree = "<group>"; };
+		AD12751129F4F6230089E446 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
+		AD12751329F4FBC10089E446 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
+		AD12751529F4FBF00089E446 /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		AD349D9629DE8E9000C8B94E /* locationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationView.swift; sourceTree = "<group>"; };
 		AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainMessagesView.swift; sourceTree = "<group>"; };
 		AD428AE429DD72FA00351BC3 /* testU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testU.swift; sourceTree = "<group>"; };
@@ -76,6 +83,7 @@
 		AD529077299FD70500425FD7 /* editProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editProfile.swift; sourceTree = "<group>"; };
 		AD529086299FFD1800425FD7 /* catogeryDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catogeryDetails.swift; sourceTree = "<group>"; };
 		AD90B894299B6523005F932F /* redirectAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = redirectAuth.swift; sourceTree = "<group>"; };
+		AD98197529F2FB0800058503 /* homeScreenHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeScreenHeader.swift; sourceTree = "<group>"; };
 		AD9E5CF429A23DC500778157 /* catagoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catagoryModel.swift; sourceTree = "<group>"; };
 		ADAB92F02990314400F8D1FA /* medicoz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = medicoz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADAB92F32990314400F8D1FA /* medicozApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = medicozApp.swift; sourceTree = "<group>"; };
@@ -115,10 +123,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD428AE329DD68FF00351BC3 /* SDWebImageSwiftUI in Frameworks */,
-				ADAB9305299031C500F8D1FA /* FirebaseDatabase in Frameworks */,
 				ADAB9309299031C500F8D1FA /* FirebaseStorage in Frameworks */,
 				ADAB9303299031C500F8D1FA /* FirebaseAuth in Frameworks */,
 				ADAB9307299031C500F8D1FA /* FirebaseFirestore in Frameworks */,
+				AD12751029F4F5C00089E446 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,8 +138,18 @@
 			children = (
 				AD428ADC29DB13F800351BC3 /* mainMessagesView.swift */,
 				AD428AD929DB096900351BC3 /* Components */,
+				AD12751129F4F6230089E446 /* RecentMessage.swift */,
+				AD12751329F4FBC10089E446 /* ChatUser.swift */,
+				AD12751529F4FBF00089E446 /* FirebaseConstants.swift */,
 			);
 			path = "Chat Section";
+			sourceTree = "<group>";
+		};
+		AD12750E29F4F5C00089E446 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AD428AD929DB096900351BC3 /* Components */ = {
@@ -206,11 +224,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		AD98197429F2FAE800058503 /* CommonComponents */ = {
+			isa = PBXGroup;
+			children = (
+				AD98197529F2FB0800058503 /* homeScreenHeader.swift */,
+			);
+			path = CommonComponents;
+			sourceTree = "<group>";
+		};
 		ADAB92E72990314400F8D1FA = {
 			isa = PBXGroup;
 			children = (
 				ADAB92F22990314400F8D1FA /* medicoz */,
 				ADAB92F12990314400F8D1FA /* Products */,
+				AD12750E29F4F5C00089E446 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,6 +252,7 @@
 		ADAB92F22990314400F8D1FA /* medicoz */ = {
 			isa = PBXGroup;
 			children = (
+				AD98197429F2FAE800058503 /* CommonComponents */,
 				AD529076299F48D300425FD7 /* Info.plist */,
 				ADAB93112990321500F8D1FA /* GoogleService-Info.plist */,
 				ADAB92F32990314400F8D1FA /* medicozApp.swift */,
@@ -372,10 +400,10 @@
 			name = medicoz;
 			packageProductDependencies = (
 				ADAB9302299031C500F8D1FA /* FirebaseAuth */,
-				ADAB9304299031C500F8D1FA /* FirebaseDatabase */,
 				ADAB9306299031C500F8D1FA /* FirebaseFirestore */,
 				ADAB9308299031C500F8D1FA /* FirebaseStorage */,
 				AD428AE229DD68FF00351BC3 /* SDWebImageSwiftUI */,
+				AD12750F29F4F5C00089E446 /* FirebaseFirestoreSwift */,
 			);
 			productName = medicoz;
 			productReference = ADAB92F02990314400F8D1FA /* medicoz.app */;
@@ -450,6 +478,7 @@
 				ADAB93B7299032E100F8D1FA /* appointmentView.swift in Sources */,
 				ADAB92F62990314400F8D1FA /* ContentView.swift in Sources */,
 				ADAC893A29E2C5A400B1ED8D /* chatLogView.swift in Sources */,
+				AD98197629F2FB0800058503 /* homeScreenHeader.swift in Sources */,
 				ADB5841B29D9C68500F47A76 /* sessionAuth.swift in Sources */,
 				AD11453029D84ED200627FCE /* doctorAuth.swift in Sources */,
 				ADB5840F29D96E8D00F47A76 /* interactionHistory.swift in Sources */,
@@ -466,9 +495,12 @@
 				ADC0274D29AB9C300092A967 /* documentLocker.swift in Sources */,
 				ADAB92F42990314400F8D1FA /* medicozApp.swift in Sources */,
 				AD11453729D8662800627FCE /* doctorHome.swift in Sources */,
+				AD12751429F4FBC10089E446 /* ChatUser.swift in Sources */,
 				ADB5841129D96E9E00F47A76 /* doctorProfile.swift in Sources */,
+				AD12751229F4F6230089E446 /* RecentMessage.swift in Sources */,
 				AD529087299FFD1800425FD7 /* catogeryDetails.swift in Sources */,
 				ADAB93B3299032E100F8D1FA /* imagePicker.swift in Sources */,
+				AD12751629F4FBF00089E446 /* FirebaseConstants.swift in Sources */,
 				ADB5842029DB04B000F47A76 /* doctorAccountSetup.swift in Sources */,
 				ADAB93C22990333400F8D1FA /* appointmentCard.swift in Sources */,
 				AD9E5CF529A23DC500778157 /* catagoryModel.swift in Sources */,
@@ -701,6 +733,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AD12750F29F4F5C00089E446 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
 		AD428AE229DD68FF00351BC3 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AD428AE129DD68FF00351BC3 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
@@ -710,11 +747,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
-		};
-		ADAB9304299031C500F8D1FA /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ADAB9301299031C500F8D1FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
 		};
 		ADAB9306299031C500F8D1FA /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;

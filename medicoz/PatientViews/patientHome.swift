@@ -13,46 +13,16 @@ struct patientHome: View {
     @Environment (\.dismiss) private var dismiss
     @State private var showImagePicker = false
     @State private var image: UIImage? = nil
-    @State  var selectedTab = 0
     @StateObject var sessionManager = SessionManager()
 
     var body: some View {
         ZStack {
-            TabView(selection: $selectedTab){
-                PatientHomeView(selectedTab: $selectedTab)
-                    .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("Home")
-                    }
-                    .tag(0)
-                mainMessagesView(didSelectNewUser: { item
-                    in
-                    print(item.email)
-                })
-                    .tabItem {
-                        Image(systemName: "message.fill")
-                        Text("Messages")
-                    }.tag(2)
-                testU()
-                    .tabItem {
-                        Image(systemName: "plus.circle")
-                        Text("Appointments")
-                    }.tag(3)
-                
-                
-                medicalHistory()
-                    .tabItem {
-                        Image(systemName: "clock.arrow.circlepath")
-                        Text("History")
-                    }.tag(4)
-                profileView()
-                    .tabItem {
-                        Image(systemName: "person")
-                        Text("Profile")
-                    }.tag(5)
-            }.edgesIgnoringSafeArea(.all)
+            ZStack {
+                PatientHomeView()
+                .edgesIgnoringSafeArea(.all)
                 .navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true)
+                .navigationBarHidden(true)
+            }
         }
     }
 }

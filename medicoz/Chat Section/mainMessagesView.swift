@@ -11,6 +11,9 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseFirestore
 import SDWebImageSwiftUI
+import FirebaseFirestoreSwift
+
+
 
 struct findUser: Identifiable {
     var id = UUID().uuidString
@@ -25,7 +28,47 @@ class MainMessagesViewModel: ObservableObject {
     
     init() {
         fetchCurrentUser()
+        fetchRecentMessages()
     }
+    
+    @Published var recentMessages = [RecentMessage]()
+    private var firestoreListener: ListenerRegistration?
+    
+    private func fetchRecentMessages() {
+        guard let uid = Firebase.Auth.auth().currentUser?.uid else { return }
+        
+        Firebase.Firestore.firestore()
+            .collection("recent_messages")
+            .document(uid)
+            .collection("messages")
+            .order(by: "timestamp")
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    self.errorMessage = "Failed to listen for recent messages: \(error)"
+                    print(error)
+                    return
+                }
+                
+                querySnapshot?.documentChanges.forEach({ change in
+                    let docId = change.document.documentID
+                    
+                    if let index = self.recentMessages.firstIndex(where: { rm in
+                        return rm.id == docId
+                    }) {
+                        self.recentMessages.remove(at: index)
+                    }
+                    
+                    do {
+                        if let rm = try change.document.data(as: RecentMessage?.self) {
+                            self.recentMessages.insert (rm, at: 0)
+                        }
+                    } catch {
+                        print (error)
+                    }
+                })
+            }
+    }
+    
     
     private func fetchCurrentUser() {
         
@@ -46,7 +89,7 @@ class MainMessagesViewModel: ObservableObject {
                 return
                 
             }
-
+            
             
             let email = data["email"] as? String ?? ""
             let name = data["name"] as? String ?? ""
@@ -58,14 +101,6 @@ class MainMessagesViewModel: ObservableObject {
     }
 }
 
-struct ChatUser: Identifiable {
-    let id: String
-    let uid: String
-    let email: String
-    let name: String
-    let profileImage: String
-}
-
 struct mainMessagesView: View {
     @State private var searchText = ""
     @State private var users = [ChatUser]()
@@ -73,6 +108,7 @@ struct mainMessagesView: View {
     @State var chatUser: ChatUser?
     @State var shouldNavigateToChatLogView = false
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject private var viewModel = MainMessagesViewModel()
     
     //filter users from firebase
     var filteredItems: [ChatUser] {
@@ -84,7 +120,7 @@ struct mainMessagesView: View {
     }
     
     var body: some View {
-        NavigationView {
+        ZStack {
             VStack {
                 if !searchText.isEmpty {
                     List(filteredItems) { user in
@@ -102,7 +138,7 @@ struct mainMessagesView: View {
                                     .overlay(RoundedRectangle(cornerRadius: 50)
                                         .stroke(Color(.label), lineWidth: 1)
                                     )
-                                    
+                                
                                 VStack(alignment: .leading){
                                     Text(user.name)
                                     Text("@\(user.email.replacingOccurrences(of: "@gmail.com", with: ""))")
@@ -123,17 +159,19 @@ struct mainMessagesView: View {
                         messagesView
                     }
                 }
-                    
+                
             }.navigationTitle("Chats")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarRole(.browser)
                 .searchable(text: $searchText)
-
             
-        }.onAppear {
-            fetchFirebaseData()
-            presentationMode.wrappedValue.dismiss()
-            searchText = ""
-            dismissKeyboard()
-        }
+        }.background(Color(.init(white: 0.95, alpha: 1)))
+            .onAppear {
+                fetchFirebaseData()
+                presentationMode.wrappedValue.dismiss()
+                searchText = ""
+                dismissKeyboard()
+            }
     }
     
     func dismissKeyboard() {
@@ -162,78 +200,162 @@ struct mainMessagesView: View {
     
     private var messagesView: some View {
         ScrollView {
-            ForEach(0..<10, id: \.self) { num in
+            ForEach(viewModel.recentMessages) { recentMessages in
                 VStack {
-                    
+                    Spacer()
                     NavigationLink {
-                        chatLogView(chatUser: self.chatUser)
+                        
+                        //chatLogView(chatUser: users)
                     } label: {
-                        HStack(spacing: 16) {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 32))
-                                .padding(8)
-                                .overlay(RoundedRectangle(cornerRadius: 44)
-                                    .stroke(Color(.label), lineWidth: 1)
-                                )
-                            
-                            
-                            VStack(alignment: .leading) {
-                                Text("Username")
-                                    .font(.system(size: 16, weight: .bold))
-                                Text("Message sent to user")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(Color(.lightGray))
+                        RoundedRectangle(cornerRadius: 15)
+                            .fill(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 90)
+                            .overlay {
+                                HStack(spacing: 10) {
+                                    WebImage(url: URL(string: recentMessages.profileImage))
+                                        .resizable()
+                                        .scaledToFill()
+                                        .clipShape(Circle())
+                                        .frame(width: 55, height: 55)
+                                        .padding(8)
+                                    
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text(recentMessages.name)
+                                            .font(.system(size: 20, weight: .bold))
+                                        Text(recentMessages.message)
+                                            .font(.system(size: 14))
+                                            .foregroundColor(Color(.lightGray))
+                                            .multilineTextAlignment(.leading)
+                                    }
+                                    Spacer()
+                                    
+                                    Text("22d")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(Color("AccentColor"))
+                                }
+                                .padding(.horizontal)
                             }
-                            Spacer()
-                            
-                            Text("22d")
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(Color("AccentColor"))
-                        }
                     }
-                    
-                    Divider()
-                        .padding(.vertical, 8)
                 }.padding(.horizontal)
-                
             }.padding(.bottom, 50)
         }
     }
-    
-    @State var showNewMessageScreen = false
-    
-    private var newMessageButton: some View {
-        Button {
-            showNewMessageScreen.toggle()
-        } label: {
-            HStack {
-                Image(systemName: "plus")
+}
+
+struct profileViewToOther: View {
+    var body: some View {
+        ZStack {
+            Image("background")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+            VStack(alignment: .center) {
+                Spacer()
+                VStack(alignment: .center, spacing: 20) {
+                    Image("myImage")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 180, height: 180, alignment: .top)
+                        .clipShape(Circle())
+                        .shadow(color: .pink, radius: 5, x: 5, y: 5)
+                    Text("Your Name")
+                        .font(.system(size: 30))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .font(.system(.largeTitle))
+                        .shadow(radius: 5)
+                    Text("IOS | FrontEnd Developer")
+                        .foregroundColor(.white)
+                        .font(.body)
+                    HStack(spacing: 40) {
+                        Image(systemName: "heart.circle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        
+                        Image(systemName: "network")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        
+                        Image(systemName: "message.circle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        
+                        Image(systemName: "phone.circle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        
+                    }
                     .foregroundColor(.white)
-                    .font(.title)
-                    .padding(20)
-                    .padding(.horizontal)
-                    .background(Color("darkAcc"))
-                    .clipShape(Circle())
-            }.padding(.bottom)
-        }
-        .fullScreenCover(isPresented: $showNewMessageScreen) {
-            //newMessageView()
+                    .shadow(color: .pink, radius: 5, y: 5)
+                    .frame(width: 250, height: 50, alignment: .center )
+                }
+                Spacer()
+                
+                VStack(alignment: .center, spacing: 30) {
+                    RoundedRectangle(cornerRadius: 120)
+                        .frame(width: 200, height: 50, alignment: .center)
+                        .foregroundColor(.white)
+                        .shadow(color: .pink, radius: 8, y: 8)
+                        .overlay(
+                            Text("Follow")
+                                .fontWeight(.bold)
+                                .foregroundColor(.pink)
+                                .font(.system(size: 30))
+                        )
+                    
+                    HStack(alignment: .center, spacing: 40) {
+                        VStack {
+                            Text("1775")
+                                .font(.title)
+                                .foregroundColor(.pink)
+                            Text("Appreciations")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                        VStack {
+                            Text("800")
+                                .font(.title)
+                                .foregroundColor(.pink)
+                            Text("Followers")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                        VStack {
+                            Text("231")
+                                .font(.title)
+                                .foregroundColor(.pink)
+                            Text("Following")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                        
+                    }
+                    Text("About You")
+                        .font(.system(size: 30))
+                        .font(.system(.caption))
+                    Text("I'm a iOS Frontend Developer. Welcome to the series of iOS-15 projects. Let's dive deeper and create some more exciting projects.")
+                        .font(.system(.body))
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(4)
+                        .opacity(0.9)
+                    
+                }
+            }.padding()
         }
     }
 }
-
-
 
 struct mainMessagesView_Previews: PreviewProvider {
     static var previews: some View {
-        mainMessagesView(didSelectNewUser: { item
-            in
-            print(item.email)
-        })
+        //        mainMessagesView(didSelectNewUser: { item
+        //            in
+        //            print(item.email)
+        //        })
+        SplashScreenView(isActive: true)
         //chatLogView(chatUser: self.chatUser)
     }
 }
-
 
 extension UIApplication {
     func dismissSearch() {

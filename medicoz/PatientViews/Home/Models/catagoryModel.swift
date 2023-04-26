@@ -15,5 +15,5 @@ struct catagoryModel {
 }
 
 enum catagoryTitle: String {
-    case Diagnostic, Shots, Consultation, Ambulance, Nurse, Medical_History
+    case Hospital, Consultation, Recipe, Appointment
 }
