@@ -110,6 +110,8 @@ struct mainMessagesView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject private var viewModel = MainMessagesViewModel()
     
+    var chatLogViewModel = ChatLogViewModel(chatUser: nil)
+    
     //filter users from firebase
     var filteredItems: [ChatUser] {
         if searchText.isEmpty {
@@ -122,56 +124,63 @@ struct mainMessagesView: View {
     var body: some View {
         ZStack {
             VStack {
-                if !searchText.isEmpty {
-                    List(filteredItems) { user in
-                        
-                        NavigationLink  {
-                            chatLogView(chatUser: user)
-                        } label: {
-                            HStack {
-                                WebImage(url: URL(string: user.profileImage))
-                                    .resizable()
-                                    .scaledToFill()
-                                    .clipped()
-                                    .frame(width: 45, height: 45)
-                                    .cornerRadius(45)
-                                    .overlay(RoundedRectangle(cornerRadius: 50)
-                                        .stroke(Color(.label), lineWidth: 1)
-                                    )
-                                
-                                VStack(alignment: .leading){
-                                    Text(user.name)
-                                    Text("@\(user.email.replacingOccurrences(of: "@gmail.com", with: ""))")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }.padding(.horizontal, 10)
+                VStack {
+                    if !searchText.isEmpty {
+                        List(filteredItems) { user in
+                            
+                            NavigationLink  {
+                                chatLogView(chatUser: user)
+                            } label: {
+                                HStack {
+                                    WebImage(url: URL(string: user.profileImage))
+                                        .resizable()
+                                        .scaledToFill()
+                                        .clipped()
+                                        .frame(width: 45, height: 45)
+                                        .cornerRadius(45)
+                                        .overlay(RoundedRectangle(cornerRadius: 50)
+                                            .stroke(Color(.label), lineWidth: 1)
+                                        )
+                                    
+                                    VStack(alignment: .leading){
+                                        Text(user.name)
+                                        Text("@\(user.email.replacingOccurrences(of: "@gmail.com", with: ""))")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }.padding(.horizontal, 10)
+                                }
                             }
                         }
+                        .onChange(of: searchText) { _ in
+                            // This will dismiss the search bar when the search text changes
+                            // (i.e. when a search result is selected)
+                            //UIApplication.shared.dismissSearch()
+                            UIApplication.shared.dismissSearch()
+                        }
+                    } else {
+                        ScrollView {
+                            messagesView
+                        }
                     }
-                    .onChange(of: searchText) { _ in
-                        // This will dismiss the search bar when the search text changes
-                        // (i.e. when a search result is selected)
-                        //UIApplication.shared.dismissSearch()
-                        UIApplication.shared.dismissSearch()
-                    }
-                } else {
-                    ScrollView {
-                        messagesView
-                    }
-                }
+                    
+                    NavigationLink("", destination: chatLogView(chatUser: chatUser), isActive: $shouldNavigateToChatLogView)
+                    
+                    
+
+                    
+                }.navigationTitle("Chats")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbarRole(.browser)
+                    .searchable(text: $searchText)
                 
-            }.navigationTitle("Chats")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarRole(.browser)
-                .searchable(text: $searchText)
-            
-        }.background(Color(.init(white: 0.95, alpha: 1)))
-            .onAppear {
-                fetchFirebaseData()
-                presentationMode.wrappedValue.dismiss()
-                searchText = ""
-                dismissKeyboard()
+            }.background(Color(.init(white: 0.95, alpha: 1)))
+                .onAppear {
+                    fetchFirebaseData()
+                    presentationMode.wrappedValue.dismiss()
+                    searchText = ""
+                    dismissKeyboard()
             }
+        }
     }
     
     func dismissKeyboard() {
@@ -199,13 +208,19 @@ struct mainMessagesView: View {
     }
     
     private var messagesView: some View {
+       
         ScrollView {
             ForEach(viewModel.recentMessages) { recentMessages in
                 VStack {
                     Spacer()
-                    NavigationLink {
+                    Button {
+                        let uid = Firebase.Auth.auth().currentUser?.uid == recentMessages.fromId ? recentMessages.toId : recentMessages.fromId
                         
-                        //chatLogView(chatUser: users)
+                        self.chatUser = .init(id: uid, uid: uid, email: recentMessages.email, name: recentMessages.name, profileImage: recentMessages.profileImage)
+                        
+                        self.chatLogViewModel.chatUser = self.chatUser
+                        self.chatLogViewModel.fetchMessages()
+                        self.shouldNavigateToChatLogView.toggle()
                     } label: {
                         RoundedRectangle(cornerRadius: 15)
                             .fill(.white)
@@ -219,7 +234,7 @@ struct mainMessagesView: View {
                                         .clipShape(Circle())
                                         .frame(width: 55, height: 55)
                                         .padding(8)
-                                    
+
                                     VStack(alignment: .leading, spacing: 8) {
                                         Text(recentMessages.name)
                                             .font(.system(size: 20, weight: .bold))
@@ -229,17 +244,24 @@ struct mainMessagesView: View {
                                             .multilineTextAlignment(.leading)
                                     }
                                     Spacer()
-                                    
-                                    Text("22d")
+
+                                    Text(recentMessages.timeAgo)
                                         .font(.system(size: 14, weight: .semibold))
                                         .foregroundColor(Color("AccentColor"))
                                 }
                                 .padding(.horizontal)
                             }
-                    }
-                }.padding(.horizontal)
-            }.padding(.bottom, 50)
-        }
+                        }
+
+                    }.padding(.horizontal)
+                }.padding(.bottom, 50)
+            }
+
+
+
+
+        
+
     }
 }
 
@@ -346,13 +368,116 @@ struct profileViewToOther: View {
     }
 }
 
+
+struct doctorP: View {
+    var body: some View {
+        ZStack {
+            VStack {
+                Spacer()
+                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                    .fill(Color.white)
+                    .frame(height: 730, alignment: .bottom)
+                    .clipped()
+                    .overlay {
+                        VStack {
+                            
+                            Group {
+                                Text("Dr. Sachin Sharma")
+                                    .font(.title).padding(7)
+                                    .padding(.top, 60)
+                                    .bold()
+                                Text("Heart Speacialist")
+                            }
+                            
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color("lightAcc"))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 100)
+                                .overlay {
+                                    HStack(spacing: 30) {
+                                        VStack {
+                                            Text("Patients")
+                                                .font(.title3)
+                                                .foregroundColor(.black.opacity(0.5))
+                                            Text("1000")
+                                                .foregroundColor(Color("darkAcc"))
+                                                .font(.title)
+                                                .bold()
+                                        }
+                                        Text("|")
+                                            .font(.largeTitle)
+                                            .foregroundColor(.black.opacity(0.5))
+                                        VStack {
+                                            Text("Experience")
+                                                .font(.title3)
+                                                .foregroundColor(.black.opacity(0.5))
+                                            Text("10yr")
+                                                .foregroundColor(Color("darkAcc"))
+                                                .font(.title)
+                                                .bold()
+                                        }
+                                        Text("|")
+                                            .font(.largeTitle)
+                                            .foregroundColor(.black.opacity(0.5))
+                                        VStack {
+                                            Text("Rating")
+                                                .font(.title3)
+                                                .foregroundColor(.black.opacity(0.5))
+                                            Text("4.8")
+                                                .foregroundColor(Color("darkAcc"))
+                                                .font(.title)
+                                                .bold()
+                                        }
+                                    }
+                                }
+                                .padding(.top)
+                            
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Text("About Doctor")
+                                        .font(.title2)
+                                    Spacer()
+                                }
+                                Button {
+                                    //
+                                } label: {
+                                    VStack(alignment: .leading) {
+                                        Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
+                                            .foregroundColor(.black)
+                                    }
+                                        
+                                }
+
+                            }.padding(.top)
+                            Spacer()
+                            
+                        }.padding()
+                    }
+                  
+                
+                    
+            }.edgesIgnoringSafeArea(.all)
+            VStack {
+                Circle()
+                    .frame(width: 130, height: 130)
+                    .offset(x: 0, y: 80)
+                Spacer()
+            }
+                
+            
+        }.background(Color("darkAcc"))
+    }
+}
+
+
 struct mainMessagesView_Previews: PreviewProvider {
     static var previews: some View {
         //        mainMessagesView(didSelectNewUser: { item
         //            in
         //            print(item.email)
         //        })
-        SplashScreenView(isActive: true)
+        //SplashScreenView(isActive: true)
+        doctorP()
         //chatLogView(chatUser: self.chatUser)
     }
 }

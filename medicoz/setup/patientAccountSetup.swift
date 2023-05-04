@@ -234,22 +234,12 @@ struct patientAccountSetup: View {
                         //Create Account Button
                         VStack{
                             Button {
-                                if name.isEmpty {
+                                if name.isEmpty || gender.isEmpty || weight.isEmpty || bg == "choose"{
                                     showAlert.toggle()
-                                    alertMessage = ("Enter Your Name")
+                                    alertMessage = ("Enter all details")
                                 }
-                                if gender.isEmpty {
-                                    showAlert.toggle()
-                                    alertMessage = ("Select Your Gender")
-                                }
-                                if weight.isEmpty {
-                                    showAlert.toggle()
-                                    alertMessage = ("Enter Your Weight")
-                                }
-                                if bg == "choose" {
-                                    showAlert.toggle()
-                                    alertMessage = ("Selsct Your Blood Group")
-                                }
+                                
+                               
                                 if bg != "choose" {
                                     userRole = "patient"
                                     sessionManager.isLoading = true

@@ -12,7 +12,7 @@ import FirebaseStorage
 struct doctorAccountSetup: View {
     @Environment (\.dismiss) private var dismiss
     @Environment (\.presentationMode) var presentationMode
-
+    
     @StateObject var sessionManager = SessionManager()
     
     @State private var showImagePicker = false
@@ -52,12 +52,12 @@ struct doctorAccountSetup: View {
                 
                 if sessionManager.isLoading {
                     ZStack {
-                            Color.clear
-                                .background(
-                                    Color.white
-                                        .opacity(0.2)
-                                        .blur(radius: 10)
-                                )
+                        Color.clear
+                            .background(
+                                Color.white
+                                    .opacity(0.2)
+                                    .blur(radius: 10)
+                            )
                         VStack {
                             ProgressView()
                                 .progressViewStyle(.circular)
@@ -218,7 +218,7 @@ struct doctorAccountSetup: View {
                                 
                             }.frame(width: 340, height: 55).padding(.vertical, 13)
                             
-                        
+                            
                             
                         }.padding(.top, 40)
                         
@@ -326,7 +326,7 @@ struct doctorAccountSetup: View {
                     return
                 }
                 
-    
+                
                 let data = ["email": email,
                             "role": userRole,
                             "uid": numericId,

@@ -21,19 +21,14 @@ struct testU: View {
     
     var body: some View {
         VStack {
-            if let image = selectedImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 200)
-            }
-            
-            Button("Select Image") {
-                isShowingImagePicker = true
-            }
-            .sheet(isPresented: $isShowingImagePicker) {
-                imagePicker(image: $selectedImage)
-            }
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.black.opacity(0.3))
+                .frame(width: 150, height: 80)
+                .overlay {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(2).padding(20)
+                }
         }
     }
 }

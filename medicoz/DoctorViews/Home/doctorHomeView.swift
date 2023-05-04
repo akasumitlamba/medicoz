@@ -18,7 +18,7 @@ struct doctorHomeView: View {
         NavigationView {
             ZStack{
                 VStack{
-                    doctorHeader()
+                    homeScreenHeader()
 
                     RoundedRectangle(cornerRadius: 0)
                         .fill(Color.gray)

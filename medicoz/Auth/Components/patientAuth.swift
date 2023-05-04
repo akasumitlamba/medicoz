@@ -177,10 +177,10 @@ struct patientAuth: View {
                                     .fontWeight(.medium)
                                     .frame(width: 300, height: 5)
                             }
-                                    .padding(.vertical, 16)
-                                    .foregroundColor(Color(.systemBackground))
-                                    .background(Color.black)
-                                    .cornerRadius(10)
+                            .padding(.vertical, 16)
+                            .foregroundColor(Color(.systemBackground))
+                            .background(Color.black)
+                            .cornerRadius(10)
                             }
                             
                             HStack{

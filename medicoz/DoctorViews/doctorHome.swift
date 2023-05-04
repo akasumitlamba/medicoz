@@ -18,47 +18,12 @@ struct doctorHome: View {
     
     var body: some View {
         ZStack {
-            TabView(selection: $selectedTab){
-//                doctorHomeView(selectedTab: $selectedTab)
-//                    .tabItem {
-//                        Image(systemName: "house.fill")
-//                        Text("Home")
-//                    }
-//                    .tag(0)
-                mainMessagesView(didSelectNewUser: { item
-                    in
-                    print(item.email)
-                })
-                    .tabItem {
-                        Image(systemName: "message.fill")
-                        Text("Messages")
-                    }.tag(2)
-                appointmentView()
-                    .tabItem {
-                        Image(systemName: "plus.circle")
-                        Text("Appointments")
-                    }.tag(3)
-                
-                
-                doctorProfile()
-                    .tabItem {
-                        Image(systemName: "person")
-                        Text("Profile")
-                    }.tag(4)
-
-            }
+            doctorHomeView()
             
             .edgesIgnoringSafeArea(.all)
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
-//            .fullScreenCover(isPresented: $sessionManager.doctorDocumentNotFound, onDismiss: nil) {
-//                doctorAccountSetup()
-//            }
-            .onAppear {
-                if Auth.auth().currentUser != nil {
-                    sessionManager.doctorApiCall()
-                }
-            }
+            
         }
     }
 }

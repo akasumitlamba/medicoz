@@ -14,6 +14,8 @@ struct homeScreenHeader: View {
     @ObservedObject private var viewModel = DataManager()
     @State var logoutAlert = false
     @State var alertMessage = ""
+    @State var showNotifications = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -34,14 +36,28 @@ struct homeScreenHeader: View {
                     .font(.title2).bold()
                 Spacer()
                 
-                NavigationLink(destination: mainMessagesView(didSelectNewUser: { item in
-                    print(item.email)
-                })) {
-                    HStack {
-                        Image("message")
-                        //Text("Message") // Use the Text view to display the string value of the image name
+                HStack {
+                    Button {
+                        showNotifications.toggle()
+                    } label: {
+                        Image("bell")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 45, height: 45)
                     }
+
+                    
+                    NavigationLink(destination: mainMessagesView(didSelectNewUser: { item in
+                        print(item.email)
+                    })) {
+                        HStack {
+                            Image("message")
+                            //Text("Message") // Use the Text view to display the string value of the image name
+                        }
                 }
+                }
+                
+                
 
              
             }
@@ -49,6 +65,8 @@ struct homeScreenHeader: View {
             .padding(.top, 50)
         }.alert(isPresented: $logoutAlert) {
             getAlert()
+        }.sheet(isPresented: $showNotifications) {
+            Text("Hello")
         }
     }
     

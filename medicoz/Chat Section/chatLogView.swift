@@ -30,7 +30,7 @@ class ChatLogViewModel: ObservableObject {
     
     @Published var message = ""
     @Published var errorMessage = ""
-    let chatUser: ChatUser?
+    var chatUser: ChatUser?
     @Published var chatMessages = [ChatMessage]()
     
     init(chatUser: ChatUser?) {
@@ -39,7 +39,7 @@ class ChatLogViewModel: ObservableObject {
         fetchMessages()
     }
     
-    private func fetchMessages() {
+    func fetchMessages() {
         guard let fromId = Firebase.Auth.auth().currentUser?.uid else { return }
         guard let toId = chatUser?.id else { return }
         Firestore.firestore()
@@ -151,7 +151,7 @@ class ChatLogViewModel: ObservableObject {
 struct chatLogView: View {
     
     let chatUser: ChatUser?
-    
+
     init(chatUser: ChatUser?) {
         self.chatUser = chatUser
         self.viewModel = .init(chatUser: chatUser)
@@ -163,7 +163,7 @@ struct chatLogView: View {
         ZStack{
             messagesView
         }
-        .navigationTitle("\(chatUser?.name ?? "")")
+        .navigationTitle("\(viewModel.chatUser?.name ?? "")")
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -209,7 +209,9 @@ struct chatLogView: View {
             .frame(height: 40)
             Button {
                 // handle message
-                viewModel.handleSend()
+                if !viewModel.message.isEmpty {
+                    viewModel.handleSend()
+                }
             } label: {
                 Text("Send")
             }.buttonStyle(.borderedProminent)
@@ -267,6 +269,7 @@ struct MessageView: View {
 
 struct chatLogView_Previews: PreviewProvider {
     static var previews: some View {
-        chatLogView(chatUser: nil)
+        //chatLogView(chatUser: nil)
+        SplashScreenView()
     }
 }
