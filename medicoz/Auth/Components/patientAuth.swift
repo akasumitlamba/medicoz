@@ -48,11 +48,15 @@ struct patientAuth: View {
                         Button {
                             sessionManager.navTitleSheet = true
                         } label: {
-                            Text("Patient")
-                                .frame(alignment: .leading)
-                                .clipped()
-                                .font(.title)
+                            HStack {
+                                Text("Patient")
+                                    .frame(alignment: .leading)
+                                    .clipped()
+                                    .font(.title)
                                 .foregroundColor(Color("lightText"))
+                                Image(systemName: "chevron.down")
+                                    .foregroundColor(Color("lightText"))
+                            }
                             
                         }
                         

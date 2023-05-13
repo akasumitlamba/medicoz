@@ -120,14 +120,14 @@ struct catagory: View {
                                 .scaledToFill()
                                 .clipped()
                             
-                                .frame(width: 40, height: 40)
+                                .frame(width: 50, height: 50)
                         }
                 }
                 
             }
             
             //have to make this correct
-            NavigationLink(destination: homeScreenHeader()) {
+            NavigationLink(destination: doctorsList()) {
                 VStack {
                     RoundedRectangle(cornerRadius: 50)
                         .fill(.white)
@@ -139,7 +139,7 @@ struct catagory: View {
                                 .scaledToFill()
                                 .clipped()
                             
-                                .frame(width: 40, height: 40)
+                                .frame(width: 45, height: 45)
                         }
                 }
             }
@@ -156,10 +156,11 @@ struct catagory: View {
                                 .scaledToFill()
                                 .clipped()
                             
-                                .frame(width: 40, height: 40)
+                                .frame(width: 65, height: 65)
                         }
                 }
             }
+
             
             NavigationLink(destination: Text("Hello")) {
                 VStack {
@@ -173,7 +174,7 @@ struct catagory: View {
                                 .scaledToFill()
                                 .clipped()
                             
-                                .frame(width: 40, height: 40)
+                                .frame(width: 50, height: 50)
                         }
                 }
             }
@@ -237,43 +238,45 @@ struct nearDoctorList: View {
     var body: some View {
         ZStack {
             VStack{
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 90)
-                    .overlay {
-                        HStack(spacing: 10) {
-                            Image("myImage")
-                                .resizable()
-                                .scaledToFill()
-                                .clipShape(Circle())
-                                .frame(width: 55, height: 55)
-                                .padding(8)
-                            
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("Dr. Karl Batchelor")
-                                    .font(.system(size: 17, weight: .bold))
-                                Text("Endocrinologists")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(Color(.lightGray))
-                            }
-                            Spacer()
-                            
-                            Capsule(style: .continuous)
-                                .fill(.green.opacity(0.75))
-                                .frame(width: 100, height: 34)
-                                .clipped()
-                                .overlay {
-                                    HStack {
-                                        Image(systemName: "location.circle")
-                                            .symbolRenderingMode(.monochrome)
-                                        Text("500 m")
-                                    }
-                                    .padding(4)
+                VStack {
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 90)
+                        .overlay {
+                            HStack(spacing: 10) {
+                                Image("myImage")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .clipShape(Circle())
+                                    .frame(width: 55, height: 55)
+                                    .padding(8)
+                                
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text("Dr. Karl Batchelor")
+                                        .font(.system(size: 17, weight: .bold))
+                                    Text("Endocrinologists")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(Color(.lightGray))
                                 }
-                        }
-                        .padding(.horizontal)
+                                Spacer()
+                                
+                                Capsule(style: .continuous)
+                                    .fill(.green.opacity(0.75))
+                                    .frame(width: 100, height: 34)
+                                    .clipped()
+                                    .overlay {
+                                        HStack {
+                                            Image(systemName: "location.circle")
+                                                .symbolRenderingMode(.monochrome)
+                                            Text("500 m")
+                                        }
+                                        .padding(4)
+                                    }
+                            }
+                            .padding(.horizontal)
                     }
+                }
                 RoundedRectangle(cornerRadius: 15)
                     .fill(.white)
                     .frame(maxWidth: .infinity)

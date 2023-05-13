@@ -208,7 +208,6 @@ struct mainMessagesView: View {
     }
     
     private var messagesView: some View {
-       
         ScrollView {
             ForEach(viewModel.recentMessages) { recentMessages in
                 VStack {
@@ -256,12 +255,6 @@ struct mainMessagesView: View {
                     }.padding(.horizontal)
                 }.padding(.bottom, 50)
             }
-
-
-
-
-        
-
     }
 }
 

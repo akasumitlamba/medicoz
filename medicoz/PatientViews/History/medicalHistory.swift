@@ -11,53 +11,10 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseFirestore
 import Foundation
+import SDWebImageSwiftUI
+import FirebaseFirestoreSwift
 
 
-//class documentManager {
-//
-//    static let shared = documentManager()
-//    private let db = Firestore.firestore()
-//
-//    func fetchMedicalDocuments(completion: @escaping ([medicalDocument]?, Error?) -> Void) {
-//        guard let uid = Auth.auth().currentUser?.uid else {
-//            completion(nil, NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "User is not logged in"]))
-//            return
-//        }
-//
-//        db.collection("medicalDocuments")
-//            .document(uid)
-//            .collection("documents")
-//            .order(by: "timestamp", descending: true)
-//            .getDocuments { (querySnapshot, error) in
-//                if let error = error {
-//                    completion(nil, error)
-//                    return
-//                }
-//
-//                var documents = [MedicalDocument]()
-//                for document in querySnapshot!.documents {
-//                    let data = document.data()
-//                    if let documentUrl = data["documentUrl"] as? String,
-//                       let disease = data["disease"] as? String,
-//                       let doctor = data["doctor"] as? String,
-//                       let clinic = data["clinic"] as? String,
-//                       let location = data["location"] as? String,
-//                       let timestamp = data["timestamp"] as? Timestamp {
-//                        let medicalDocument = MedicalDocument(documentUrl: documentUrl, disease: disease, doctor: doctor, clinic: clinic, location: location, timestamp: timestamp.dateValue())
-//                        documents.append(medicalDocument)
-//                    }
-//                }
-//
-//                completion(documents, nil)
-//            }
-//    }
-//
-//}
-
-struct Document {
-    var id: String
-    var data: [String: Any]
-}
 
 struct medicalHistory: View {
     @State private var showImagePicker = false
@@ -72,105 +29,129 @@ struct medicalHistory: View {
     @State private var showToast = false
     @State private var isLoading = false
     @State private var isButtonPressed = false
+    @State private var anyDocument = false
+    @State private var isLoader = false
     
-    let db = Firestore.firestore()
-    @State var documents = [Document]()
+    @ObservedObject private var viewModel = documentModel()
+    
+    @State private var documents: [DocumentSnapshot] = [] // Store fetched documents
+    
     
     @Environment (\.presentationMode) var presentationMode
     
     var body: some View {
-        VStack {
-            ZStack {
-                VStack {
-                    ScrollView {
-                        ForEach(documents, id: \.id) { document in
-                            VStack {
-                                Spacer()
+        ZStack {
+            if isLoader {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .scaleEffect(2).padding(20)
+            }
+            else {
+                if anyDocument {
+                    VStack {
+                        ScrollView {
+                            ForEach(documents, id: \.documentID) { document in
                                 NavigationLink {
-                                    //chatLogView(chatUser: self.chatUser)
+                                    //
                                 } label: {
                                     VStack {
-                                        Image("myImage")
-                                            .renderingMode(.original)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .mask { RoundedRectangle(cornerRadius: 10, style: .continuous) }
-                                            .overlay {
-                                                Group {
-                                                    VStack {
-                                                        Spacer()
-                                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                                            .fill(.black.opacity(0.5))
-                                                            .frame(height: 70, alignment: .bottom)
-                                                            .clipped()
-                                                            .overlay {
-                                                                Group {
-                                                                    HStack(spacing: 10) {
-                                                                        VStack(alignment: .leading, spacing: 10) {
-                                                                            Text(document.data["disease"] as? String ?? "")
-                                                                                .font(.system(size: 20, weight: .bold))
-                                                                                .foregroundColor(.white)
-                                                                            Text(document.data["doctor"] as? String ?? "")
-                                                                                .font(.system(size: 14))
-                                                                                .foregroundColor(.white)
-                                                                        }
-                                                                        Spacer()
-                                                                        
-                                                                        Text("22d")
-                                                                            .font(.system(size: 14, weight: .semibold))
-                                                                            .foregroundColor(.white)
-                                                                    }.padding()
+                                        Spacer()
+                                        VStack {
+                                            WebImage(url: URL(string: document["documentUrl"] as? String ?? ""))
+                                                .renderingMode(.original)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .mask { RoundedRectangle(cornerRadius: 10, style: .continuous) }
+                                                .overlay {
+                                                    Group {
+                                                        VStack {
+                                                            Spacer()
+                                                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                                                .fill(.black.opacity(0.5))
+                                                                .frame(height: 70, alignment: .bottom)
+                                                                .clipped()
+                                                                .overlay {
+                                                                    Group {
+                                                                        HStack(spacing: 10) {
+                                                                            VStack(alignment: .leading, spacing: 10) {
+                                                                                Text(document["disease"] as? String ?? "")
+                                                                                    .font(.system(size: 20, weight: .bold))
+                                                                                    .foregroundColor(.white)
+                                                                                HStack(spacing: 5) {
+                                                                                    Text("Dr.")
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(.white)
+                                                                                    Text(document["doctor"] as? String ?? "")
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(.white)
+                                                                                }
+                                                                            }
+                                                                            Spacer()
+                                                                            if let timestamp = document["timestamp"] as? Timestamp {
+                                                                                Text(timeAgo(timestamp: timestamp))
+                                                                                    .font(.system(size: 14, weight: .semibold))
+                                                                                    .foregroundColor(.white)
+                                                                            }
+                                                                            
+                                                                           
+                                                                        }.padding()
+                                                                    }
                                                                 }
-                                                            }
+                                                        }
                                                     }
                                                 }
-                                            }
-                                    }
-                                    
-                                    
+                                        }
+                                    }.padding(.horizontal)
                                 }
-                            }.padding(.horizontal)
-                        }.padding(.bottom, 50)
-                    }
-                }
-                .fullScreenCover(isPresented: $showPreview, onDismiss: nil) {
-                    upload
-                }
-            }.background(Color(.init(white: 0.95, alpha: 1)))
-                .navigationTitle("Medical History")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            //show image picker
-                            showPreview.toggle()
-                        } label: {
-                            Image(systemName: "plus")
+                                
+                            }.padding(.bottom, 50)
                         }
-                        
-                    }
-                }
-                .alert(alertMessage, isPresented: $showAlert) {
-                    Button("OK", role: .cancel) {}
-                }
-                .onAppear {
-                    db.collection("collection_name").getDocuments { (snapshot, error) in
-                        if let error = error {
-                            print(error.localizedDescription)
-                            return
+                        .fullScreenCover(isPresented: $showPreview, onDismiss: nil) {
+                            upload
                         }
-                        
-                        guard let documents = snapshot?.documents else {
-                            print("No documents found.")
-                            return
+                        .background(Color(.init(white: 0.95, alpha: 1)))
+                        .navigationTitle("Medical History")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button {
+                                    //show image picker
+                                    showPreview.toggle()
+                                } label: {
+                                    Image(systemName: "plus")
+                                }
+                            }
                         }
-                        
-                        self.documents = documents.map { Document(id: $0.documentID, data: $0.data()) }
+                        .alert(alertMessage, isPresented: $showAlert) {
+                            Button("OK", role: .cancel) {}
+                        }
                     }
+                    
                 }
+                else {
+                    Text("No Documents Found")
+                        .font(.title)
+                        .foregroundColor(.black.opacity(0.5))
+                }
+            }
         }
-        
+        .onAppear {
+            fetchData()
+        }
     }
+    
+    func dateString(from date: Date) -> String {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.timeStyle = .none
+            return formatter.string(from: date)
+        }
+    
+    func timeAgo(timestamp: Timestamp) -> String {
+           let formatter = RelativeDateTimeFormatter()
+           formatter.unitsStyle = .abbreviated
+           return formatter.localizedString(for: timestamp.dateValue(), relativeTo: Date())
+       }
     
     private var upload: some View {
         NavigationView {
@@ -311,9 +292,6 @@ struct medicalHistory: View {
         }
     }
     
-    
-    
-    
     private func uploadData() {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -399,6 +377,26 @@ struct medicalHistory: View {
         
     }
     
+    func fetchData() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        
+        let db = Firestore.firestore()
+        db.collection("medicalDocuments")
+            .document(uid)
+            .collection("documents")
+            .order(by: "timestamp", descending: true) // Order by the "time" field in descending order
+            .getDocuments { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
+                    anyDocument = false
+                    return
+                }
+                self.documents = documents
+                anyDocument = true
+            }
+    }
+    
+    
     
 }
 
@@ -408,9 +406,3 @@ struct medicalHistory_Previews: PreviewProvider {
     }
 }
 
-
-struct preview: View {
-    var body: some View {
-        Text("Test")
-    }
-}

@@ -7,38 +7,61 @@
 
 import SwiftUI
 import Firebase
-import FirebaseAuth
+import CoreLocation
 
+class LocationManager: NSObject, CLLocationManagerDelegate {
+    private let locationManager = CLLocationManager()
 
+    @Published var userLocation: CLLocation?
 
-import SwiftUI
-import Firebase
-import FirebaseStorage
+    override init() {
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
 
-struct testU: View {
-    @State private var selectedImage: UIImage?
-    @State private var isShowingImagePicker = false
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            userLocation = location
+        }
+    }
+}
+
+struct cView: View {
+    @ObservedObject var locationManager = LocationManager()
+
     var body: some View {
         VStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.black.opacity(0.3))
-                .frame(width: 150, height: 80)
-                .overlay {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .scaleEffect(2).padding(20)
+            if let location = $locationManager.userLocation.wrappedValue {
+                Text("Latitude: \(location.coordinate.latitude)")
+                Text("Longitude: \(location.coordinate.longitude)")
+                Button(action: {
+                    // Store location in Firebase Firestore
+                    let db = Firestore.firestore()
+                    let userLocation = GeoPoint(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                    db.collection("users").document("current_user_document_id").setData(["location": userLocation], merge: true) { error in
+                        if let error = error {
+                            print("Error storing location: \(error.localizedDescription)")
+                        } else {
+                            print("Location stored successfully!")
+                        }
+                    }
+                }) {
+                    Text("Store Location")
                 }
+            } else {
+                Text("Fetching location...")
+            }
         }
     }
 }
 
 
-
-
-
-struct testU_Previews: PreviewProvider {
+struct cView_Previews: PreviewProvider {
     static var previews: some View {
-        testU()
+        cView()
     }
 }
+
