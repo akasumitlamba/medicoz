@@ -54,7 +54,7 @@ struct homeScreenHeader: View {
                             Image("message")
                             //Text("Message") // Use the Text view to display the string value of the image name
                         }
-                }
+                    }
                 }
                 
                 

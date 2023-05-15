@@ -14,7 +14,7 @@ struct patientHome: View {
     @State private var showImagePicker = false
     @State private var image: UIImage? = nil
     @StateObject var sessionManager = SessionManager()
-    @ObservedObject private var viewModel = documentModel()
+    
 
     var body: some View {
         ZStack {

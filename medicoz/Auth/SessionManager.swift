@@ -65,11 +65,13 @@ class SessionManager: ObservableObject {
             else if let user = result?.user {
                 let randomNumber = abs(UUID().hashValue) % 1000000000
                 let numericId = String(format: "%010d", randomNumber)
-
+                guard let uid = Auth.auth().currentUser?.uid else {return}
+                
                 let userData = [
                     "email": user.email ?? "",
                     "role": role,
-                    "uid": numericId
+                    "uid": uid,
+                    "nid": numericId
                 ]
                 
                 

@@ -341,7 +341,8 @@ struct patientAccountSetup: View {
                 
                 let data = ["email": email,
                             "role": userRole,
-                            "uid": numericId,
+                            "uid": uid,
+                            "nid": numericId,
                             "name": name,
                             "profileImage": downloadURL.absoluteString,
                             "birthday": birthday,

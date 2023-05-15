@@ -32,7 +32,6 @@ struct medicalHistory: View {
     @State private var anyDocument = false
     @State private var isLoader = false
     
-    @ObservedObject private var viewModel = documentModel()
     
     @State private var documents: [DocumentSnapshot] = [] // Store fetched documents
     

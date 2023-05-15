@@ -114,8 +114,138 @@ struct doctorsList: View {
     
 }
 
+struct doctorProfileView: View {
+    var body: some View {
+        NavigationView{
+            ScrollView{
+                VStack(spacing: 20) {
+                    VStack {
+                        HStack{
+                            Image("myImage")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                            
+                            VStack(alignment: .leading, spacing: 8) {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Text("Registration No :")
+                                            .font(.subheadline)
+                                        Text("1234")
+                                            .font(.subheadline)
+                                    }
+                                    
+                                    Text("Sachin Sharma")
+                                        .font(.title)
+                                        .bold()
+                                    
+                                }
+                                
+                                Text("Cardio in Kaloti")
+                                    .font(.title3)
+                            }
+                            Spacer()
+                        }.padding()
+                    }
+                    Divider()
+                    
+                    HStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(.white)
+                            .frame(width: 180, height: 40)
+                            .border(.gray).cornerRadius(5)
+                            .cornerRadius(5)
+                            .overlay {
+                                
+                                HStack {
+                                    Image("icon1")
+                                        .resizable()
+                                        .accentColor(.green.opacity(0.5))
+                                        .scaledToFit()
+                                        .frame(width: 35, height: 35)
+                                    Text("IN-CLINIC")
+                                        .font(.subheadline)
+                                    Text("VISITS")
+                                        .font(.subheadline)
+                                }
+                            }
+                        Spacer()
+                    }.padding(.horizontal)
+                    
+                    
+                    VStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 100)
+                            .overlay {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Image(systemName: "globe")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 30, height: 30)
+                                        //Spacer()
+                                    }.padding()
+                                    
+                                    VStack(alignment: .leading, spacing: 10){
+                                        Text("English")
+                                            .font(.title2)
+                                            .bold()
+                                        Text("Languages")
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                    }
+                                    Spacer()
+                                }
+                            }
+                    }.padding(.horizontal)
+                    
+                    VStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 200)
+                            .overlay {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Text("ABOUT THE DOCTOR")
+                                            .bold()
+                                        Spacer()
+                                    }.padding(.bottom, 10)
+                                    Text("Hello")
+                                }.padding()
+                            }
+                    }.padding(.horizontal)
+                    
+                    VStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 150)
+                            .overlay {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Text("CLINIC")
+                                            .frame(maxWidth: .infinity)
+                                            .frame(height: 40)
+                                        Spacer()
+                                    }.background(.green.opacity(0.5))
+                                    Spacer()
+                                }.cornerRadius(10)
+                            }
+                    }.padding(.horizontal)
+                }
+            }
+            .background(Color(.init(white: 0.95, alpha: 1)))
+        }
+    }
+}
+
 struct doctorsList_Previews: PreviewProvider {
     static var previews: some View {
-        doctorsList()
+        //doctorsList()
+        doctorProfileView()
     }
 }
